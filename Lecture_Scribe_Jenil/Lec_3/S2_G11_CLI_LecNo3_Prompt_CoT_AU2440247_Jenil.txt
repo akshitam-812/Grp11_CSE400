@@ -1,0 +1,83 @@
+Task Definition
+You are generating a lecture scribe.
+The output must be a faithful, exam-ready reconstruction of what was taught in the provided lecture materials.
+This scribe will be used as primary reference material for a reading-based / closed-notes exam.
+
+Authoritative Context
+Use only the attached context:
+
+Lecture slides / lecture PDF
+
+Relevant textbook sections corresponding to this lecture
+
+Do not use any outside knowledge.
+Do not add material that does not explicitly appear in or directly follow from the context.
+
+Core Constraints
+
+Prioritize correctness and precision over explanation style
+
+Follow the same structure, order, and scope as the lecture
+
+Do not invent definitions, results, examples, or interpretations
+
+Do not simplify, re-teach, or add intuition not present in the lecture
+
+Do not include creative explanations or commentary
+
+Required Content Elements
+The scribe must include, wherever applicable:
+
+Definitions and notation exactly as used in lecture
+
+Assumptions, conditions, and constraints
+
+Statements of theorems, propositions, or results
+
+Proofs or derivations written step by step, with all intermediate logical steps explicitly shown
+
+Worked examples reproduced line-by-line, matching the lecture’s solution flow
+
+Clear logical dependencies between concepts (what relies on what)
+
+Reasoning Style Requirement
+
+When derivations or proofs occur in the lecture, reproduce them in a sequential, explicit manner
+
+Each step must follow logically from the previous one
+
+Mathematical steps, substitutions, and transformations must be shown
+
+Do not skip steps unless they were skipped in the lecture itself
+
+Exclusions
+The output must not include:
+
+New examples
+
+Extra practice problems
+
+Intuition, motivation, or informal explanations unless explicitly stated in the lecture
+
+Alternative proofs or methods
+
+Commentary on why something is useful beyond what was taught
+
+Quality Check Standard
+Write the scribe so that the answer to the following question is yes:
+
+“If a student studies only this document, can they reliably recall definitions, reconstruct derivations, and follow example solutions exactly as taught?”
+
+Output Format
+
+Use clear section headings matching the lecture flow
+
+Use mathematical notation consistently
+
+Maintain a formal, academic tone
+
+Keep the document concise but complete
+
+Begin generating the lecture scribe using only the provided context.
+
+give overleaf (latex) code 
