@@ -1,0 +1,203 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{setspace}
+
+\geometry{margin=1in}
+\onehalfspacing
+
+\title{\textbf{CSE400 – Fundamentals of Probability in Computing}\\
+Lecture 7: Expectation, CDFs, PDFs, and Problem Solving}
+\author{Source: Lecture slides by Dhaval Patel, PhD}
+\date{January 27, 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{The Cumulative Distribution Function (CDF)}
+
+\subsection{Definition of the CDF}
+
+Let $X$ be a random variable.  
+The \textbf{Cumulative Distribution Function (CDF)} of $X$ is defined as
+\[
+F_X(x) = \Pr(X \le x), \quad -\infty < x < \infty.
+\]
+
+For every real number $x$, the function $F_X(x)$ assigns the probability that the random variable $X$ takes a value less than or equal to $x$.  
+Thus, the CDF is a mapping from the real line to probabilities.
+
+The lecture explicitly notes that \textbf{most of the information about the random experiment described by the random variable $X$ is determined by the behavior of $F_X(x)$}.
+
+\subsection{Properties of the CDF}
+
+\subsubsection*{Property 1: Boundedness}
+
+\[
+0 \le F_X(x) \le 1.
+\]
+
+\textbf{Reasoning:}  
+Since $F_X(x) = \Pr(X \le x)$ is a probability, by the axioms of probability it must lie between $0$ and $1$ inclusive.
+
+\subsubsection*{Property 2: Limits at Infinity}
+
+\[
+F_X(-\infty) = 0, \quad F_X(\infty) = 1.
+\]
+
+\textbf{Reasoning:}
+\begin{itemize}
+    \item As $x \to -\infty$, the event $\{X \le x\}$ becomes impossible, so its probability approaches $0$.
+    \item As $x \to \infty$, the event $\{X \le x\}$ becomes certain, so its probability approaches $1$.
+\end{itemize}
+
+\subsubsection*{Property 3: Monotonicity}
+
+For $x_1 < x_2$,
+\[
+F_X(x_1) \le F_X(x_2).
+\]
+
+\textbf{Reasoning:}  
+If $x_1 < x_2$, then the event $\{X \le x_1\}$ is a subset of the event $\{X \le x_2\}$.  
+Since probabilities are monotone with respect to set inclusion, the inequality follows.  
+Hence, a valid CDF must be non-decreasing.
+
+\subsubsection*{Property 4: Probability Over an Interval}
+
+For $x_1 < x_2$,
+\[
+\Pr(x_1 < X \le x_2) = F_X(x_2) - F_X(x_1).
+\]
+
+\textbf{Reasoning:}  
+The event $\{x_1 < X \le x_2\}$ can be written as the difference between the events $\{X \le x_2\}$ and $\{X \le x_1\}$.  
+Subtracting their probabilities yields the stated result.
+
+\subsection{Example: Validity of Candidate CDFs}
+
+\subsubsection*{Candidate 1}
+
+\[
+F_X(x) = \frac{1}{2} + \frac{1}{\pi}\tan^{-1}(x).
+\]
+
+\begin{itemize}
+    \item As $x \to -\infty$, $\tan^{-1}(x) \to -\frac{\pi}{2}$, hence $F_X(x) \to 0$.
+    \item As $x \to \infty$, $\tan^{-1}(x) \to \frac{\pi}{2}$, hence $F_X(x) \to 1$.
+    \item The function is monotone increasing.
+\end{itemize}
+
+Therefore, this function satisfies all CDF properties and is valid.
+
+\subsubsection*{Candidate 2}
+
+\[
+F_X(x) = \left(1 - e^{-x}\right)u(x),
+\]
+where $u(x)$ is the unit step function.
+
+\begin{itemize}
+    \item For $x < 0$, $u(x) = 0$, so $F_X(x) = 0$.
+    \item For $x \ge 0$, $F_X(x) = 1 - e^{-x}$, which increases from $0$ to $1$.
+    \item The function is non-decreasing and bounded between $0$ and $1$.
+\end{itemize}
+
+Hence, this is a valid CDF.
+
+\subsubsection*{Candidate 3}
+
+\[
+F_X(x) = e^{-x^2}.
+\]
+
+\begin{itemize}
+    \item As $x \to -\infty$, $e^{-x^2} \to 0$.
+    \item As $x \to \infty$, $e^{-x^2} \to 0$, not $1$.
+\end{itemize}
+
+This violates the property $F_X(\infty) = 1$, so it is not a valid CDF.
+
+\section{The Probability Density Function (PDF)}
+
+\subsection{Definition of the PDF}
+
+For a continuous random variable, the \textbf{Probability Density Function (PDF)} of $X$ at point $x$ is defined as
+\[
+f_X(x) = \lim_{\epsilon \to 0} \frac{\Pr(x \le X \le x + \epsilon)}{\epsilon}.
+\]
+
+This definition considers the probability that $X$ lies in a small interval of width $\epsilon$ around $x$, normalized by the interval length.
+
+\subsection{Relationship Between PDF and CDF}
+
+For a continuous range,
+\[
+\Pr(x \le X \le x + \epsilon) = F_X(x + \epsilon) - F_X(x).
+\]
+
+Substituting into the PDF definition,
+\[
+f_X(x) = \lim_{\epsilon \to 0} \frac{F_X(x + \epsilon) - F_X(x)}{\epsilon}.
+\]
+
+By the definition of the derivative,
+\[
+f_X(x) = \frac{dF_X(x)}{dx}.
+\]
+
+\subsection{Logical Dependency Between PDF and CDF}
+
+\begin{itemize}
+    \item The PDF of a random variable is the derivative of its CDF.
+    \item The CDF of a random variable can be expressed as the integral of its PDF.
+\end{itemize}
+
+\section{Expectation of Random Variables}
+
+\subsection{Definition of Expectation}
+
+Expectation is a numerical summary associated with a random variable.  
+It is defined with respect to the distribution of the random variable and is used to compute average or mean values.
+
+\subsection{Expectation of a Function of a Random Variable}
+
+The expectation of a function of $X$ is computed by applying the same probabilistic weighting defined for $X$ itself.
+
+\subsection{Linear Operations with Expectation}
+
+Expectation is linear under addition and scalar multiplication.  
+This allows expectations of sums or scaled random variables to be computed systematically.
+
+\section{Moments and Central Moments of Random Variables}
+
+\subsection{n-th Moments}
+
+The $n$-th moments are higher-order expectations that characterize the distribution of a random variable.
+
+\subsection{Central Moments}
+
+Central moments are defined relative to the mean and include:
+\begin{itemize}
+    \item Variance
+    \item Skewness
+    \item Kurtosis
+\end{itemize}
+
+These quantities provide measures of spread, asymmetry, and tail behavior.
+
+\section{Summary}
+
+Lecture 7 establishes:
+\begin{itemize}
+    \item The formal definition and properties of the CDF
+    \item Methods to verify whether a function is a valid CDF
+    \item The definition of the PDF and its derivation from the CDF
+    \item The derivative--integral relationship between PDF and CDF
+    \item The concept of expectation and higher-order moments
+\end{itemize}
+
+\end{document}
