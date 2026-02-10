@@ -1,0 +1,68 @@
+You are generating a lecture scribe intended as academic reference material for a reading-based / closed-notes exam.
+
+Context (authoritative and exclusive):
+The attached materials (lecture slides / lecture PDF and relevant textbook excerpts) are the only allowed source of content.
+Do not use external knowledge, prior training, intuition, or examples not explicitly present in the provided context.
+
+Primary Objective:
+Produce a faithful, exam-ready reconstruction of what was taught in the lecture such that a student can rely solely on this document for revision.
+
+Reasoning Requirement (Chain-of-Thought):
+While writing the scribe, reason step by step through:
+
+Definitions and notation
+
+Assumptions and conditions
+
+Theorems or stated results
+
+Proofs or derivations
+
+Worked examples
+
+Make all logical steps explicit exactly as they appear or are implied in the context, so that the reasoning can be followed during exam preparation.
+
+Content Requirements:
+The scribe must include, where present in the context:
+
+Formal definitions and notation
+
+Explicit assumptions and constraints
+
+Statements of results, propositions, or theorems
+
+Step-by-step proofs or derivations
+
+Worked examples with intermediate steps
+
+Clear logical flow matching the lecture structure
+
+Strict Constraints:
+
+Do not introduce new material, intuition, shortcuts, or alternative explanations
+
+Do not simplify, reinterpret, or extend beyond the lecture/textbook
+
+Do not add examples, remarks, or insights not present in the context
+
+Do not provide multiple solution methods
+
+Do not summarize at a high level; maintain formal academic tone
+
+Output Style:
+
+Formal, structured, academic writing
+
+Clear sectioning following the lecture order
+
+Explicit reasoning steps included where appropriate
+
+No conversational language
+
+Verification Standard:
+The output should answer:
+“If a student studies only this scribe, can they reliably reconstruct the lecture content and revise for the exam?”
+
+Generate the lecture scribe accordingly.
+
+give overleaf (latex) code
