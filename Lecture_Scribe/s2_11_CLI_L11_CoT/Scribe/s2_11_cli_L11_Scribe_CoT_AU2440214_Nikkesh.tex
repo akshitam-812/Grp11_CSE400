@@ -1,0 +1,271 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{enumitem}
+
+\setstretch{1.15}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+%------------------------------------------------
+% Title Section
+%------------------------------------------------
+
+\begin{center}
+    {\Large \textbf{CSE400 – Fundamentals of Probability in Computing}} \\[8pt]
+    {\large \textbf{Lecture 11: Transformation of Random Variables}} \\[12pt]
+    Dhaval Patel, PhD \\
+    Associate Professor \\
+    SEAS – Ahmedabad University \\
+    February 10, 2026
+\end{center}
+
+\vspace{10pt}
+\hrule
+
+%------------------------------------------------
+% Outline
+%------------------------------------------------
+
+\section*{Outline}
+
+\begin{enumerate}
+    \item \textbf{Transformation of Random Variables}  
+    Learning of transformation techniques for random variables.
+    
+    \item \textbf{Function of Two Random Variables}  
+    Joint transformations and derived distributions.
+    
+    \item \textbf{Illustrative Example}  
+    Detailed derivation for the case: $Z = X + Y$
+\end{enumerate}
+
+\vspace{10pt}
+\hrule
+\vspace{15pt}
+
+%------------------------------------------------
+% Section 1
+%------------------------------------------------
+
+\section*{1. Transformation of Random Variables}
+
+\textbf{Assumption}
+
+The PDF of random variable $X$, denoted $f_X(x)$, is known \textit{a priori}.
+
+Objective: To find the PDF of a new random variable
+
+\[
+Y = g(X)
+\]
+
+%---------------------------
+\subsection*{Case 1: Monotonic Transformation}
+
+Assume $g(x)$ is monotonic (either strictly increasing or strictly decreasing).
+
+\textbf{Step S1: Find the CDF of $Y$}
+
+\[
+F_Y(y) = \Pr(Y \le y)
+\]
+
+Since $Y = g(X)$,
+
+\[
+F_Y(y) = \Pr(g(X) \le y)
+\]
+
+If $g$ is monotonic increasing,
+
+\[
+g(X) \le y \iff X \le g^{-1}(y)
+\]
+
+\[
+F_Y(y) = F_X(g^{-1}(y))
+\]
+
+\textbf{Step S2: Differentiate to obtain PDF}
+
+\[
+f_Y(y) = \frac{d}{dy}F_Y(y)
+\]
+
+\[
+= f_X(g^{-1}(y)) \cdot \frac{d}{dy}g^{-1}(y)
+\]
+
+\[
+= f_X(x)\left|\frac{dx}{dy}\right|_{x=g^{-1}(y)}
+\]
+
+%---------------------------
+\subsection*{Case 2: Monotonic Decreasing Function}
+
+\[
+g(X) \le y \iff X \ge g^{-1}(y)
+\]
+
+\[
+F_Y(y) = 1 - F_X(g^{-1}(y))
+\]
+
+\[
+f_Y(y) = f_X(x)\left|\frac{dx}{dy}\right|_{x=g^{-1}(y)}
+\]
+
+%---------------------------
+\subsection*{Final Result (Monotonic Case)}
+
+\[
+\boxed{
+f_Y(y) =
+\frac{f_X(x)}
+{\left| \frac{dy}{dx} \right|}
+\Bigg|_{x = g^{-1}(y)}
+}
+\]
+
+\vspace{15pt}
+\hrule
+\vspace{15pt}
+
+%------------------------------------------------
+% Section 2
+%------------------------------------------------
+
+\section*{2. Example: Transformation}
+
+Given
+
+\[
+X \sim \text{Uniform}(-1,1)
+\]
+
+\[
+f_X(x)=
+\begin{cases}
+\dfrac{1}{2}, & -1<x<1 \\
+0, & \text{otherwise}
+\end{cases}
+\]
+
+Transformation:
+
+\[
+Y = \sin\left(\frac{\pi X}{2}\right)
+\]
+
+\subsection*{Step 1: Inverse Transformation}
+
+\[
+X = \frac{2}{\pi}\sin^{-1}(Y)
+\]
+
+\subsection*{Step 2: Derivative}
+
+\[
+\frac{dx}{dy}=
+\frac{2}{\pi}
+\frac{1}{\sqrt{1-y^2}}
+\]
+
+\subsection*{Step 3: Apply Formula}
+
+\[
+f_Y(y)=
+\frac{1}{2}
+\cdot
+\frac{2}{\pi}
+\cdot
+\frac{1}{\sqrt{1-y^2}}
+=
+\frac{1}{\pi\sqrt{1-y^2}}
+\]
+\subsection*{Step 4: Limits}
+\[
+f_Y(y)=
+\begin{cases}
+\dfrac{1}{\pi\sqrt{1-y^2}}, & -1<y<1 \\
+0, & \text{otherwise}
+\end{cases}
+\]
+
+\vspace{15pt}
+\hrule
+\vspace{15pt}
+
+%------------------------------------------------
+% Section 3
+%------------------------------------------------
+
+\section*{3. Function of Two Random Variables}
+
+Consider
+\[
+Z = X + Y
+\]
+We are required to find:
+
+\begin{enumerate}
+    \item PDF of $Z$, $f_Z(z)$
+    \item $f_Z(z)$ if $X$ and $Y$ are independent
+    \item If $X \sim N(0,1)$ and $Y \sim N(0,1)$, prove $Z \sim N(0,2)$
+    \item If $X$ and $Y$ are exponential with parameter $\lambda$, find $f_Z(z)$
+\end{enumerate}
+
+\subsection*{Illustrative Example: Derivation for $Z = X + Y$}
+
+\textbf{Step 1: CDF}
+
+\[
+F_Z(z)=\Pr(X+Y \le z)
+\]
+
+\subsection*{Step 2: Double Integral}
+
+\[
+F_Z(z)=
+\iint_{x+y \le z}
+f_{X,Y}(x,y)\,dx\,dy
+\]
+
+\subsection*{Step 3: Horizontal Strip}
+
+\[
+F_Z(z)=
+\int_{-\infty}^{\infty}
+\int_{-\infty}^{z-y}
+f_{X,Y}(x,y)\,dx\,dy
+\]
+
+\subsection*{Step 4: Vertical Strip}
+
+\[
+F_Z(z)=
+\int_{-\infty}^{\infty}
+\int_{-\infty}^{z-x}
+f_{X,Y}(x,y)\,dy\,dx
+\]
+
+\subsection*{Step 5: Differentiate}
+
+\[
+f_Z(z)=
+\frac{d}{dz}F_Z(z)
+\]
+
+\vspace{20pt}
+
+\begin{center}
+\textit{This completes the lecture material exactly as presented in Lecture 11.}
+\end{center}
+
+\end{document}
