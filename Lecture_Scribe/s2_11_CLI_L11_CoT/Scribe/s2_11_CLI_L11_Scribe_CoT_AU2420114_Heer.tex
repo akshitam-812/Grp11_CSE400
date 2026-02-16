@@ -1,0 +1,238 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{setspace}
+
+\geometry{margin=1in}
+\onehalfspacing
+
+\title{\textbf{CSE400 – Fundamentals of Probability in Computing}\\
+Lecture 11: Transformation of Random Variables}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Transformation of One Random Variable}
+
+Let $X$ be a continuous random variable with known probability density function (PDF) $f_X(x)$.  
+Let a new random variable $Y$ be defined as a function of $X$:
+\[
+Y = g(X).
+\]
+
+The objective is to derive the PDF of $Y$, denoted $f_Y(y)$, given the PDF of $X$.
+
+\subsection{Step 1: Start from the Cumulative Distribution Function (CDF)}
+
+By definition, the CDF of $Y$ is
+\[
+F_Y(y) = \Pr(Y \le y).
+\]
+
+Substituting $Y = g(X)$,
+\[
+F_Y(y) = \Pr(g(X) \le y).
+\]
+
+\subsection{Step 2: Use Monotonicity of the Transformation}
+
+The lecture considers monotonic transformations $g(x)$, which may be:
+\begin{itemize}
+    \item Monotonically increasing, or
+    \item Monotonically decreasing.
+\end{itemize}
+
+This assumption is essential because it allows inversion of the function $g(x)$.
+
+\subsubsection*{Case 1: $g(x)$ is Monotonically Increasing}
+
+If $g(x)$ is increasing, then
+\[
+g(X) \le y \iff X \le g^{-1}(y).
+\]
+
+Hence,
+\[
+F_Y(y) = \Pr(X \le g^{-1}(y)) = F_X(g^{-1}(y)).
+\]
+
+\subsubsection*{Case 2: $g(x)$ is Monotonically Decreasing}
+
+If $g(x)$ is decreasing, then
+\[
+g(X) \le y \iff X \ge g^{-1}(y).
+\]
+
+Thus,
+\[
+F_Y(y) = \Pr(X \ge g^{-1}(y)) = 1 - F_X(g^{-1}(y)).
+\]
+
+\subsection{Step 3: Differentiate the CDF to Obtain the PDF}
+
+The PDF of $Y$ is obtained by differentiating the CDF with respect to $y$:
+\[
+f_Y(y) = \frac{d}{dy}F_Y(y).
+\]
+
+For the increasing case,
+\[
+f_Y(y) = \frac{d}{dy}\left[F_X(g^{-1}(y))\right].
+\]
+
+Applying the chain rule,
+\[
+f_Y(y) = f_X(g^{-1}(y)) \cdot \frac{d}{dy}\left[g^{-1}(y)\right].
+\]
+
+\subsection{Step 4: Role of the Absolute Derivative}
+
+Both increasing and decreasing cases can be combined using the absolute value of the derivative:
+\[
+\boxed{
+f_Y(y) = \frac{f_X(x)}{\left|\dfrac{dy}{dx}\right|}
+\quad \text{evaluated at } x = g^{-1}(y)
+}
+\]
+
+The absolute value accounts for:
+\begin{itemize}
+    \item Positive slope (increasing transformation),
+    \item Negative slope (decreasing transformation).
+\end{itemize}
+
+Thus, the magnitude of stretching or compression of the transformation directly affects the density.
+
+\section{Function of Two Random Variables}
+
+Let $X$ and $Y$ be two continuous random variables with joint PDF $f_{X,Y}(x,y)$.  
+Define a new random variable
+\[
+Z = X + Y.
+\]
+
+The objective is to derive the PDF $f_Z(z)$.
+
+\subsection{Step 1: Define the CDF of $Z$}
+
+By definition,
+\[
+F_Z(z) = \Pr(Z \le z).
+\]
+
+Substituting $Z = X + Y$,
+\[
+F_Z(z) = \Pr(X + Y \le z).
+\]
+
+\subsection{Step 2: Geometric Interpretation}
+
+The condition $X + Y \le z$ represents a region in the $(x,y)$-plane bounded by:
+\begin{itemize}
+    \item The line $x + y = z$,
+    \item The support of the joint PDF $f_{X,Y}(x,y)$.
+\end{itemize}
+
+The probability is computed by integrating the joint PDF over this region.
+
+\subsection{Step 3: Express the CDF as a Double Integral}
+
+From the lecture setup,
+\[
+F_Z(z) =
+\int_{-\infty}^{\infty}
+\int_{-\infty}^{z-x}
+f_{X,Y}(x,y)\,dy\,dx.
+\]
+
+\subsection{Step 4: Differentiate to Obtain the PDF}
+
+Differentiating with respect to $z$,
+\[
+f_Z(z) = \frac{d}{dz}F_Z(z).
+\]
+
+Differentiation with respect to the upper limit yields
+\[
+\boxed{
+f_Z(z) = \int_{-\infty}^{\infty} f_{X,Y}(x, z-x)\,dx
+}.
+\]
+
+\section{Illustrative Examples}
+
+\subsection{Example 1: Transformation of a Uniform Random Variable}
+
+Let
+\begin{itemize}
+    \item $X \sim \text{Uniform}(-1,1)$,
+    \item $Y = \sin\!\left(\dfrac{\pi X}{2}\right)$.
+\end{itemize}
+
+\subsubsection*{Step 1: PDF of $X$}
+
+\[
+f_X(x) =
+\begin{cases}
+\dfrac{1}{2}, & -1 < x < 1,\\
+0, & \text{otherwise}.
+\end{cases}
+\]
+
+\subsubsection*{Step 2: Transformation and Inverse}
+
+\[
+y = \sin\!\left(\dfrac{\pi x}{2}\right)
+\quad \Rightarrow \quad
+x = \dfrac{2}{\pi}\sin^{-1}(y).
+\]
+
+\subsubsection*{Step 3: Derivative}
+
+\[
+\frac{dx}{dy}
+= \frac{2}{\pi}\cdot\frac{1}{\sqrt{1-y^2}}.
+\]
+
+\subsubsection*{Step 4: Apply the Transformation Formula}
+
+\[
+f_Y(y) = f_X(x)\left|\frac{dx}{dy}\right|
+= \frac{1}{2}\cdot\frac{2}{\pi\sqrt{1-y^2}}
+= \frac{1}{\pi\sqrt{1-y^2}}.
+\]
+
+\subsubsection*{Step 5: Support of $Y$}
+
+Since $x \in (-1,1)$ implies $y \in (-1,1)$,
+\[
+f_Y(y) =
+\begin{cases}
+\dfrac{1}{\pi\sqrt{1-y^2}}, & -1 < y < 1,\\
+0, & \text{otherwise}.
+\end{cases}
+\]
+
+\subsection{Example 2: Derivation for $Z = X + Y$}
+
+The lecture follows these steps:
+\begin{enumerate}
+    \item Define $Z = X + Y$,
+    \item Write $F_Z(z) = \Pr(X + Y \le z)$,
+    \item Identify the region under the line $x + y = z$,
+    \item Integrate the joint PDF over this region,
+    \item Differentiate with respect to $z$.
+\end{enumerate}
+
+This yields
+\[
+\boxed{
+f_Z(z) = \int_{-\infty}^{\infty} f_{X,Y}(x, z-x)\,dx
+}.
+\]
+
+\end{document}
