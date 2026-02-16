@@ -1,0 +1,340 @@
+\documentclass[11pt]{article}
+
+% ===================== PACKAGES =====================
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+
+% ===================== HEADER =====================
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{CSE400}
+\lhead{Lecture 11}
+\cfoot{\thepage}
+
+% ===================== DOCUMENT =====================
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{Lecture 11: Transformation of Random Variables}}\\[0.5em]
+    \textbf{CSE400 - Fundamentals of Probability in Computing}\\
+    February 10, 2026
+\end{center}
+
+\vspace{1em}
+
+\section*{Outline}
+\begin{enumerate}
+    \item Transformation of Random Variables
+    \item Function of Two Random Variables
+    \item Illustrative Example: $Z = X + Y$
+\end{enumerate}
+
+% ============================================================
+\section{Change of Single Random Variable}
+
+\subsection{Problem Setting}
+
+Let $X$ be a continuous random variable with probability density function (PDF) $f_X(x)$.  
+Let $Y$ be defined as
+
+\[
+Y = g(X)
+\]
+
+The objective is to determine the PDF of $Y$, denoted $f_Y(y)$.
+
+% ------------------------------------------------------------
+\subsection{CDF-Based Derivation}
+
+We begin with the cumulative distribution function (CDF):
+
+\[
+F_Y(y) = P(Y \le y)
+\]
+
+Substituting $Y = g(X)$:
+
+\[
+F_Y(y) = P(g(X) \le y)
+\]
+
+Assume $g(x)$ is strictly monotonic and invertible.
+
+% ------------------------------------------------------------
+\subsubsection*{Case 1: $g(x)$ is Increasing}
+
+If $g(x)$ is strictly increasing:
+
+\[
+g(X) \le y \quad \Longleftrightarrow \quad X \le g^{-1}(y)
+\]
+
+Thus,
+
+\[
+F_Y(y) = P(X \le g^{-1}(y)) = F_X(g^{-1}(y))
+\]
+
+Differentiate with respect to $y$:
+
+\[
+f_Y(y) = \frac{d}{dy}F_X(g^{-1}(y))
+\]
+
+Using the chain rule:
+
+\[
+f_Y(y) = f_X(g^{-1}(y)) \cdot \frac{d}{dy}g^{-1}(y)
+\]
+
+Therefore,
+
+\[
+\boxed{
+f_Y(y) = f_X(x)\left| \frac{dx}{dy} \right|
+}
+\quad \text{where } x = g^{-1}(y)
+\]
+
+% ------------------------------------------------------------
+\subsubsection*{Role of Absolute Value}
+
+If $g(x)$ is decreasing, then $\frac{dx}{dy}$ is negative.  
+Since density must be non-negative, we take absolute value:
+
+\[
+\boxed{
+f_Y(y) = f_X(g^{-1}(y))
+\left| \frac{d}{dy} g^{-1}(y) \right|
+}
+\]
+
+% ============================================================
+\section{Function of Two Random Variables}
+
+\subsection{Problem Setting}
+
+Let $X$ and $Y$ be continuous random variables with joint PDF:
+
+\[
+f_{X,Y}(x,y)
+\]
+
+Define new variables:
+
+\[
+Z = g(X,Y)
+\]
+
+Our goal is to determine the PDF of $Z$.
+
+% ------------------------------------------------------------
+\subsection{Auxiliary Variable Method}
+
+Introduce an auxiliary variable $W$ such that:
+
+\[
+\begin{cases}
+Z = g(X,Y) \\
+W = h(X,Y)
+\end{cases}
+\]
+
+Assume transformation is one-to-one and invertible:
+
+\[
+x = x(z,w), \qquad y = y(z,w)
+\]
+
+% ------------------------------------------------------------
+\subsection{Jacobian of Transformation}
+
+The joint PDF transforms as:
+
+\[
+\boxed{
+f_{Z,W}(z,w)
+=
+f_{X,Y}(x,y)
+\left| J \right|
+}
+\]
+
+where the Jacobian determinant is:
+
+\[
+J =
+\begin{vmatrix}
+\frac{\partial x}{\partial z} & \frac{\partial x}{\partial w} \\
+\frac{\partial y}{\partial z} & \frac{\partial y}{\partial w}
+\end{vmatrix}
+\]
+
+% ------------------------------------------------------------
+\subsection{Obtaining the PDF of $Z$}
+
+Marginalize over $W$:
+
+\[
+f_Z(z)
+=
+\int_{-\infty}^{\infty}
+f_{Z,W}(z,w)\,dw
+\]
+
+Thus,
+
+\[
+\boxed{
+f_Z(z)
+=
+\int
+f_{X,Y}(x,y)
+\left| J \right|
+\, dw
+}
+\]
+
+% ============================================================
+\section{Illustrative Example: $Z = X + Y$}
+
+\subsection{Step 1: Define Transformation}
+
+\[
+Z = X + Y
+\]
+
+Choose auxiliary variable:
+
+\[
+W = Y
+\]
+
+Thus,
+
+\[
+\begin{cases}
+Z = X + Y \\
+W = Y
+\end{cases}
+\]
+
+% ------------------------------------------------------------
+\subsection{Step 2: Inverse Transformation}
+
+Solve for $X$ and $Y$:
+
+\[
+Y = W
+\]
+
+\[
+X = Z - W
+\]
+
+Thus,
+
+\[
+x = z - w, \qquad y = w
+\]
+
+% ------------------------------------------------------------
+\subsection{Step 3: Compute Jacobian}
+
+\[
+J =
+\begin{vmatrix}
+\frac{\partial x}{\partial z} & \frac{\partial x}{\partial w} \\
+\frac{\partial y}{\partial z} & \frac{\partial y}{\partial w}
+\end{vmatrix}
+\]
+
+Compute derivatives:
+
+\[
+\frac{\partial x}{\partial z} = 1,
+\quad
+\frac{\partial x}{\partial w} = -1,
+\]
+
+\[
+\frac{\partial y}{\partial z} = 0,
+\quad
+\frac{\partial y}{\partial w} = 1
+\]
+
+Thus,
+
+\[
+J =
+\begin{vmatrix}
+1 & -1 \\
+0 & 1
+\end{vmatrix}
+= 1
+\]
+
+Hence,
+
+\[
+|J| = 1
+\]
+
+% ------------------------------------------------------------
+\subsection{Step 4: Joint Density Transformation}
+
+\[
+f_{Z,W}(z,w)
+=
+f_{X,Y}(z-w, w)
+\]
+
+% ------------------------------------------------------------
+\subsection{Step 5: Obtain PDF of $Z$}
+
+\[
+f_Z(z)
+=
+\int_{-\infty}^{\infty}
+f_{X,Y}(z-w, w)\,dw
+\]
+
+This gives the derived distribution of the sum.
+
+% ============================================================
+\section*{Final Results}
+
+\[
+\boxed{
+f_Y(y)
+=
+f_X(g^{-1}(y))
+\left|
+\frac{d}{dy} g^{-1}(y)
+\right|
+}
+\]
+
+\[
+\boxed{
+f_{Z,W}(z,w)
+=
+f_{X,Y}(x,y)
+\left| J \right|
+}
+\]
+
+\[
+\boxed{
+f_Z(z)
+=
+\int
+f_{X,Y}(x,y)
+\left| J \right|
+\, dw
+}
+\]
+
+\end{document}
