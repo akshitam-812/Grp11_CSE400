@@ -1,0 +1,228 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\title{\textbf{CSE400 -- Fundamentals of Probability in Computing}\\
+\large Lecture 11: Transformation of Random Variables}
+\author{Dhaval Patel, PhD (Associate Professor)\\
+SEAS -- Ahmedabad University, Ahmedabad, Gujarat, India}
+\date{February 10, 2026}
+
+\begin{document}
+\maketitle
+
+% Source: Uploaded lecture PDF. :contentReference[oaicite:0]{index=0}
+
+\section*{Overview / Outline (as in lecture)}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Transformation of Random Variables}\\
+    Learning of transformation techniques for random variables.
+    \item \textbf{Function of Two Random Variables}\\
+    Joint transformations and derived distributions.
+    \item \textbf{Illustrative Example}\\
+    Detailed derivation for the case: $Z = X + Y$.
+\end{enumerate}
+
+\section{Definitions \& Notation}
+\begin{itemize}[leftmargin=1.2em]
+    \item Random variable (RV): $X$, $Y$, $Z$.
+    \item Transformation (single RV): \quad $Y = g(X)$.
+    \item CDF of a RV $X$: \quad $F_X(x) = \Pr(X \le x)$.
+    \item PDF of a continuous RV $X$: \quad $f_X(x)$, with the relationship
+    \[
+    f_X(x) = \frac{d}{dx}F_X(x)\quad \text{(when differentiable)}.
+    \]
+    \item Inverse mapping (when it exists): \quad $x = g^{-1}(y)$.
+\end{itemize}
+
+\section{Assumptions / Constraints (as used in the lecture derivations)}
+\begin{itemize}[leftmargin=1.2em]
+    \item The PDF of the original RV (e.g., $f_X(x)$) is assumed to be known \emph{a priori}.
+    \item For the single-variable transformation method shown:
+    \begin{itemize}
+        \item $g(\cdot)$ is \textbf{monotonic} (lecture separates cases: $+ve$ / increasing vs $-ve$ / decreasing).
+        \item $g^{-1}(\cdot)$ exists on the relevant range.
+        \item Differentiation steps assume the needed derivatives exist.
+    \end{itemize}
+    \item If a detail/condition is not explicitly provided beyond the above, it is \textbf{Not specified in the provided context.}
+\end{itemize}
+
+\section{Main Results / Theorems (with conditions)}
+\subsection{Single RV transformation: $Y=g(X)$ (monotonic $g$)}
+\textbf{Step S1 (CDF method).}
+
+\paragraph{Case 1: $g$ is increasing (\textit{``+ve'' monotone})}
+\begin{align}
+F_Y(y) 
+&= \Pr(Y \le y) \\
+&= \Pr(g(X)\le y) \\
+&= \Pr\bigl(X \le g^{-1}(y)\bigr) \\
+&= F_X\bigl(g^{-1}(y)\bigr).
+\end{align}
+
+\paragraph{Case 2: $g$ is decreasing (\textit{``-ve'' monotone})}
+\begin{align}
+F_Y(y)
+&= \Pr(Y \le y) \\
+&= \Pr(g(X)\le y) \\
+&= \Pr\bigl(X \ge g^{-1}(y)\bigr) \\
+&= 1 - F_X\bigl(g^{-1}(y)\bigr).
+\end{align}
+
+\textbf{Step S2 (Differentiate to obtain PDF).}
+
+\paragraph{Increasing case}
+Differentiate $F_Y(y)=F_X(g^{-1}(y))$ w.r.t.\ $y$:
+\begin{align}
+f_Y(y) 
+&= \frac{d}{dy}F_Y(y) \\
+&= \frac{d}{dy}\Bigl[F_X\bigl(g^{-1}(y)\bigr)\Bigr] \\
+&= f_X\bigl(g^{-1}(y)\bigr)\cdot \frac{d}{dy}\bigl[g^{-1}(y)\bigr].
+\end{align}
+Let $x=g^{-1}(y)$. Then $\dfrac{dx}{dy}=\dfrac{d}{dy}g^{-1}(y)$, so
+\[
+f_Y(y)= f_X(x)\left|\frac{dx}{dy}\right| \quad \text{with } x=g^{-1}(y).
+\]
+
+\paragraph{Decreasing case}
+Starting from $F_Y(y)=1-F_X(g^{-1}(y))$:
+\begin{align}
+f_Y(y)
+&= \frac{d}{dy}F_Y(y) \\
+&= -\, f_X\bigl(g^{-1}(y)\bigr)\cdot \frac{d}{dy}\bigl[g^{-1}(y)\bigr].
+\end{align}
+Taking absolute value (as emphasized in the lecture’s boxed formula), the unified form is
+\[
+f_Y(y)= f_X(x)\left|\frac{dx}{dy}\right|\quad \text{with } x=g^{-1}(y).
+\]
+
+\textbf{Step S3 (Change the limits / support).}\\
+The valid range of $y$ is obtained by mapping the support of $x$ through $y=g(x)$ (lecture notes: ``change the limits for $Y$'').
+
+\subsection{Equivalent boxed formula shown in the lecture}
+Using $\left|\dfrac{dx}{dy}\right| = \dfrac{1}{\left|\dfrac{dy}{dx}\right|}$ (when derivatives exist),
+\[
+\boxed{
+f_Y(y)= \frac{f_X(x)}{\left|\dfrac{dy}{dx}\right|}\biggr|_{x=g^{-1}(y)}
+}
+\]
+This is the boxed relationship displayed in the lecture.
+
+\section{Proofs / Derivations (step-by-step, as in lecture)}
+\subsection{Derivation structure for $Y=g(X)$}
+The lecture’s derivation proceeds in the following explicit sequence:
+\begin{enumerate}[label=\textbf{S\arabic*:}, leftmargin=2.2em]
+    \item Compute $F_Y(y)=\Pr(Y\le y)$ and rewrite the event in terms of $X$ using monotonicity and the inverse $g^{-1}$.
+    \item Differentiate $F_Y(y)$ w.r.t.\ $y$ to obtain $f_Y(y)$, applying the chain rule.
+    \item Determine the correct support/range for $y$ by transforming the original $x$-limits through $y=g(x)$.
+\end{enumerate}
+
+\subsection{Two-RV function setup used for the example $Z=X+Y$}
+The lecture sets up the CDF of $Z$ via a region in the $(x,y)$-plane:
+\begin{align}
+F_Z(z)
+&= \Pr(Z \le z) \\
+&= \Pr(X+Y \le z).
+\end{align}
+Using the joint PDF $f_{X,Y}(x,y)$, the probability is written as a double integral over the region
+\[
+\{(x,y): x+y\le z\}.
+\]
+One explicit ``vertical strip'' form written in the lecture is:
+\[
+F_Z(z)=\int_{x=-\infty}^{\infty}\int_{y=-\infty}^{z-x} f_{X,Y}(x,y)\,dy\,dx.
+\]
+(An equivalent ``horizontal strip'' order is implied by the lecture’s annotation about vertical/horizontal swapping, but any further simplification is \textbf{Not specified in the provided context}.)
+
+Then, to obtain the PDF:
+\[
+f_Z(z)=\frac{d}{dz}F_Z(z).
+\]
+Any closed-form $f_Z(z)$ beyond this setup depends on additional assumptions/distributions, which are listed as sub-questions in the lecture (see Worked Examples).
+
+\section{Worked Examples (step-by-step)}
+\subsection{Example 1: $X\sim \text{Uniform}(-1,1)$, $Y=g(X)=\sin\left(\frac{\pi X}{2}\right)$}
+\textbf{Given (as written in the lecture):}
+\[
+f_X(x)=
+\begin{cases}
+\frac{1}{2}, & -1<x<1,\\
+0, & \text{otherwise}.
+\end{cases}
+\qquad
+Y=\sin\left(\frac{\pi X}{2}\right).
+\]
+
+\textbf{Step 1: Invert the transformation.}\\
+From $y=\sin\left(\frac{\pi x}{2}\right)$,
+\[
+x = \frac{2}{\pi}\sin^{-1}(y).
+\]
+
+\textbf{Step 2: Compute the derivative factor.}
+\[
+\frac{dx}{dy}
+= \frac{2}{\pi}\cdot \frac{1}{\sqrt{1-y^2}}.
+\]
+
+\textbf{Step 3: Apply the transformation formula.}
+Using $f_Y(y)=f_X(x)\left|\frac{dx}{dy}\right|$ with $x=\frac{2}{\pi}\sin^{-1}(y)$:
+\begin{align}
+f_Y(y)
+&= \frac{1}{2}\cdot \left|\frac{2}{\pi}\cdot \frac{1}{\sqrt{1-y^2}}\right| \\
+&= \frac{1}{\pi\sqrt{1-y^2}}.
+\end{align}
+
+\textbf{Step 4: Determine the support (change limits).}\\
+Lecture maps endpoints:
+\[
+x=-1 \Rightarrow y=\sin\left(-\frac{\pi}{2}\right)=-1,
+\qquad
+x=1 \Rightarrow y=\sin\left(\frac{\pi}{2}\right)=1.
+\]
+Hence,
+\[
+f_Y(y)=
+\begin{cases}
+\dfrac{1}{\pi\sqrt{1-y^2}}, & -1<y<1,\\[6pt]
+0, & \text{otherwise}.
+\end{cases}
+\]
+
+\subsection{Example 2 (illustrative setup): $Z=X+Y$}
+The lecture explicitly states the following items to find/prove (no full solutions shown beyond the CDF-region setup):
+\begin{enumerate}[label=(\roman*), leftmargin=2.2em]
+    \item Find the PDF of $Z$, $f_Z(z)$.
+    \item Find $f_Z(z)$ if $X$ and $Y$ are independent.
+    \item Let $X\sim N(0,1)$ and $Y\sim N(0,1)$. Prove that $Z\sim N(0,2)$.
+    \item If $X$ and $Y$ are exponential distributed RVs with parameter $\lambda$, find $f_Z(z)$.
+\end{enumerate}
+
+\textbf{Derivation shown (CDF setup):}
+\begin{align}
+F_Z(z)
+&= \Pr(Z\le z) \\
+&= \Pr(X+Y\le z) \\
+&= \iint_{x+y\le z} f_{X,Y}(x,y)\,dx\,dy \\
+&= \int_{-\infty}^{\infty}\int_{-\infty}^{z-x} f_{X,Y}(x,y)\,dy\,dx.
+\end{align}
+Further evaluation for cases (ii)--(iv) is \textbf{Not specified in the provided context} beyond listing these tasks.
+
+\section*{Summary of Key Takeaways (only from context)}
+\begin{itemize}[leftmargin=1.2em]
+    \item To find the distribution of a transformed RV $Y=g(X)$ (with monotonic $g$), the lecture uses the \textbf{CDF method} followed by differentiation.
+    \item For monotonic transformations, the resulting PDF uses the absolute derivative factor:
+    \[
+    f_Y(y)= f_X\bigl(g^{-1}(y)\bigr)\left|\frac{d}{dy}g^{-1}(y)\right|
+    \quad \text{equivalently}\quad
+    f_Y(y)=\frac{f_X(x)}{\left|\frac{dy}{dx}\right|}\Big|_{x=g^{-1}(y)}.
+    \]
+    \item The support of the new RV must be obtained by \textbf{changing limits} (mapping $x$-range through $y=g(x)$).
+    \item For $Z=X+Y$, the lecture sets up $F_Z(z)=\Pr(X+Y\le z)$ as a \textbf{double integral over the half-plane} $x+y\le z$ using $f_{X,Y}(x,y)$, and then uses $f_Z(z)=\dfrac{d}{dz}F_Z(z)$.
+\end{itemize}
+
+\end{document}

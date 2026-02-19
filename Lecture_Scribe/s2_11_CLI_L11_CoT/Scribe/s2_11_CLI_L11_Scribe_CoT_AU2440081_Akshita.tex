@@ -1,0 +1,224 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{setspace}
+\setstretch{1.2}
+
+\begin{document}
+
+\section*{CSE400 -- Fundamentals of Probability in Computing}
+
+\subsection*{Lecture 11: Transformation of Random Variables}
+
+\textbf{Instructor:} Dhaval Patel \\
+\textbf{Course:} CSE400 -- Fundamentals of Probability in Computing \\
+\textbf{Affiliation:} SEAS-Ahmedabad University, Ahmedabad, Gujarat, India \\
+\textbf{Date:} February 10, 2026
+
+\hrule
+\vspace{1em}
+
+\section{Transformation of Random Variables}
+
+\subsection{Objective}
+
+\begin{itemize}
+    \item To learn transformation techniques for random variables.
+    \item To determine the distribution of a transformed random variable.
+    \item To extend the idea to functions involving two random variables.
+    \item To derive the distribution in the illustrative case:
+    \begin{itemize}
+        \item $Z = X + Y$
+    \end{itemize}
+\end{itemize}
+
+\section{Transformation of a Random Variable}
+
+Let:
+\begin{itemize}
+    \item $X$ be a random variable.
+    \item A new random variable $Z$ be defined as a function of $X$, i.e.,
+    \[
+        Z = g(X)
+    \]
+\end{itemize}
+
+The objective is:
+\begin{itemize}
+    \item To determine the distribution of $Z$ from the known distribution of $X$.
+\end{itemize}
+
+\subsection{General Method (CDF-Based Approach)}
+
+To find the distribution of $Z$:
+\begin{enumerate}
+    \item Define:
+    \[
+        F_Z(z) = P(Z \leq z)
+    \]
+    \item Since $Z = g(X)$, substitute:
+    \[
+        F_Z(z) = P(g(X) \leq z)
+    \]
+    \item Express the event $g(X) \leq z$ in terms of $X$.
+    \item Use the known distribution of $X$ to compute the probability.
+    \item Once $F_Z(z)$ is obtained, differentiate (if continuous) to obtain the PDF:
+    \[
+        f_Z(z) = \frac{d}{dz} F_Z(z)
+    \]
+\end{enumerate}
+
+\section{Function of Two Random Variables}
+
+Let:
+\begin{itemize}
+    \item $X$ and $Y$ be two random variables.
+    \item Define a new random variable:
+    \[
+        Z = g(X, Y)
+    \]
+\end{itemize}
+
+The objective is:
+\begin{itemize}
+    \item To determine the distribution of $Z$ from the joint distribution of $X$ and $Y$.
+\end{itemize}
+
+\subsection{Joint Distribution Framework}
+
+If:
+\begin{itemize}
+    \item $f_{X,Y}(x,y)$ is the joint PDF of $X$ and $Y$,
+\end{itemize}
+
+Then:
+\begin{itemize}
+    \item Probabilities involving $Z$ are computed using the joint distribution.
+\end{itemize}
+
+\subsection{CDF of $Z$}
+
+To determine the distribution of $Z$:
+\begin{enumerate}
+    \item Define:
+    \[
+        F_Z(z) = P(Z \leq z)
+    \]
+    \item Substitute:
+    \[
+        F_Z(z) = P(g(X,Y) \leq z)
+    \]
+    \item Express the event $g(X,Y) \leq z$ as a region in the $(x,y)$-plane.
+    \item Compute:
+    \[
+        F_Z(z) = \iint_{g(x,y) \leq z} f_{X,Y}(x,y)\, dx\, dy
+    \]
+    \item If continuous, differentiate:
+    \[
+        f_Z(z) = \frac{d}{dz} F_Z(z)
+    \]
+\end{enumerate}
+
+\section{Illustrative Example: $Z = X + Y$}
+
+Let:
+\[
+    Z = X + Y
+\]
+
+Objective:
+\begin{itemize}
+    \item To derive the distribution of $Z$.
+\end{itemize}
+
+\subsection{CDF of $Z$}
+
+By definition:
+\[
+    F_Z(z) = P(Z \leq z)
+\]
+
+Substitute:
+\[
+    F_Z(z) = P(X + Y \leq z)
+\]
+
+This corresponds to:
+\begin{itemize}
+    \item The set of all $(x,y)$ such that:
+    \[
+        x + y \leq z
+    \]
+\end{itemize}
+
+Thus:
+\[
+    F_Z(z) = \iint_{x+y \leq z} f_{X,Y}(x,y)\, dx\, dy
+\]
+
+\subsection{Derivation of the PDF}
+
+To obtain the PDF:
+\[
+    f_Z(z) = \frac{d}{dz} F_Z(z)
+\]
+
+Using the integral expression:
+\[
+    F_Z(z) = \iint_{x+y \leq z} f_{X,Y}(x,y)\, dx\, dy
+\]
+
+Differentiating with respect to $z$ yields:
+\[
+    f_Z(z) = \int_{-\infty}^{\infty} f_{X,Y}(x, z - x)\, dx
+\]
+
+This provides the distribution of $Z = X + Y$.
+
+\section{Logical Flow of the Lecture}
+
+\begin{itemize}
+    \item Start with transformation of a single random variable.
+    \item Extend to functions involving two random variables.
+    \item Use the cumulative distribution function as the primary method.
+    \item Convert probability statements into integrals over appropriate regions.
+    \item Differentiate to obtain the PDF.
+    \item Apply the method to the specific case:
+    \[
+        Z = X + Y
+    \]
+\end{itemize}
+
+\section{Key Formulas}
+
+\subsection*{Single Random Variable}
+
+\[
+    F_Z(z) = P(g(X) \leq z)
+\]
+
+\[
+    f_Z(z) = \frac{d}{dz} F_Z(z)
+\]
+
+\subsection*{Two Random Variables}
+
+\[
+    F_Z(z) = \iint_{g(x,y) \leq z} f_{X,Y}(x,y)\, dx\, dy
+\]
+
+\subsection*{Special Case: $Z = X + Y$}
+
+\[
+    F_Z(z) = P(X + Y \leq z)
+\]
+
+\[
+    f_Z(z) = \int_{-\infty}^{\infty} f_{X,Y}(x, z-x)\, dx
+\]
+
+\vspace{1em}
+\noindent\textbf{End of Lecture 11 Scribe}
+
+\end{document}
