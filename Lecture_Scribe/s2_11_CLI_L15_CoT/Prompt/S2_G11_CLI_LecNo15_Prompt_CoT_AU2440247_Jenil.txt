@@ -1,0 +1,46 @@
+Task: Generate a lecture scribe intended to serve as academic reference material for preparing for a reading-based / closed-notes exam.
+
+Context (authoritative and exclusive):
+You must rely ONLY on the material provided in the attached context:
+1. Lecture slides / lecture PDF
+2. Relevant textbook excerpts for this lecture
+
+Do not use any outside knowledge, prior training information, intuition, or examples that do not explicitly appear in the provided context.
+
+Primary Objective:
+Produce a faithful and structured reconstruction of what was taught in the lecture so that a student studying only this document can reliably revise the material.
+
+Reasoning Requirement (Chain-of-Thought):
+While writing the lecture scribe, reason step-by-step through the lecture content. Make the logical progression explicit so that a student can follow how definitions lead to results, how assumptions are used in derivations, and how conclusions are reached.
+
+Content Requirements:
+The lecture scribe must include, when present in the context:
+• Definitions and notation introduced in the lecture
+• Assumptions and conditions used in results or proofs
+• Statements of theorems, propositions, or key results
+• Step-by-step proofs or proof sketches
+• Derivations and logical arguments explained sequentially
+• Worked examples with intermediate steps
+• Clear transitions that show logical dependencies between concepts
+
+Explanation Guidelines:
+• Explicitly explain definitions and assumptions before using them.
+• Reconstruct proofs and derivations step-by-step when they appear in the context.
+• When an example solution is present, explain each step of the reasoning used to reach the result.
+• Maintain the logical structure and order in which the concepts appear in the lecture.
+
+Constraints:
+• All reasoning must come only from the provided context.
+• Do not introduce new theorems, examples, or explanations not present in the lecture or textbook material.
+• Do not simplify, summarize, or reinterpret content creatively.
+• Do not add intuition or external explanations beyond the provided materials.
+
+Style Requirements:
+• Use a formal, academic tone suitable for exam revision.
+• Organize the scribe using clear sections and logical structure.
+• Ensure the document allows a student to recall definitions, reconstruct proofs, and follow example solutions.
+
+Final Goal:
+The final lecture scribe should allow a student to study only this document and reliably revise what was taught in the lecture for exam preparation.
+
+give all the theory and numerical of the ppt and make sure that anything other than this ppt is not included and all the things should be up till point
