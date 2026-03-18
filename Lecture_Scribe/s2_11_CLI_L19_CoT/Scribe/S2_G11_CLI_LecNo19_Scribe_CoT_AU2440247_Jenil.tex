@@ -1,0 +1,220 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage[a4paper, margin=1in]{geometry}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{Lecture 19: N-Variate Joint PDF / PMF / CDF}}
+\end{center}
+
+\section*{1. Joint Distribution of N Random Variables}
+
+\subsection*{Definition}
+
+For random variables $(X_1, X_2, \dots, X_n)$, we define the vector:
+
+\[
+\mathbf{X} =
+\begin{bmatrix}
+X_1 \\
+X_2 \\
+\vdots \\
+X_n
+\end{bmatrix}
+\]
+
+\begin{itemize}
+    \item The \textbf{joint distribution} describes the probability behavior of all variables \textbf{together}.
+    \item It can be represented using:
+    \begin{itemize}
+        \item Joint PMF (for discrete variables)
+        \item Joint PDF (for continuous variables)
+        \item Joint CDF
+    \end{itemize}
+\end{itemize}
+
+\section*{2. Joint Gaussian Distribution}
+
+\subsection*{Joint PDF for Two Variables}
+
+For two random variables $(X)$ and $(Y)$:
+
+\[
+f_{XY}(x,y) =
+\frac{1}{2\pi \sigma_X \sigma_Y \sqrt{1 - \rho^2}}
+\exp \left\{
+-\frac{1}{2(1-\rho^2)} \left[
+\left(\frac{x-\mu_X}{\sigma_X}\right)^2
++
+\left(\frac{y-\mu_Y}{\sigma_Y}\right)^2
+- 2\rho \left(\frac{x-\mu_X}{\sigma_X}\right)
+\left(\frac{y-\mu_Y}{\sigma_Y}\right)
+\right]
+\right\}
+\]
+
+\subsection*{Parameters}
+
+\begin{itemize}
+    \item $(\mu_X, \mu_Y)$: Means
+    \item $(\sigma_X, \sigma_Y)$: Standard deviations
+    \item $(\rho)$: Pearson correlation coefficient
+\end{itemize}
+
+\section*{3. Example 1: Jointly Gaussian Variables}
+
+\subsection*{Given}
+
+\begin{itemize}
+    \item $(\mu_X = 2, \sigma_X = 1)$
+    \item $(\mu_Y = -3, \sigma_Y = 2)$
+    \item $\text{cov}(X,Y) = -1$
+\end{itemize}
+
+\subsection*{(a) Joint PDF}
+
+\subsubsection*{Step 1: Find Correlation Coefficient}
+
+\[
+\rho_{XY} = \frac{\text{cov}(X,Y)}{\sigma_X \sigma_Y}
+\]
+
+Substitute values:
+\[
+\rho_{XY} = \frac{-1}{1 \cdot 2} = -0.5
+\]
+
+\subsubsection*{Step 2: Substitute into Joint PDF}
+
+Using:
+
+\begin{itemize}
+    \item $(\mu_X = 2)$
+    \item $(\mu_Y = -3)$
+    \item $(\sigma_X = 1)$
+    \item $(\sigma_Y = 2)$
+    \item $(\rho = -0.5)$
+\end{itemize}
+
+Final joint PDF is obtained by substituting into the general formula.
+
+\subsection*{(b) Marginal PDFs}
+
+\subsubsection*{Definition}
+
+\[
+f_X(x) = \int_{-\infty}^{\infty} f_{XY}(x,y)\,dy
+\]
+\[
+f_Y(y) = \int_{-\infty}^{\infty} f_{XY}(x,y)\,dx
+\]
+
+\subsubsection*{Key Property (Given in PPT)}
+
+If variables are jointly Gaussian:
+
+\begin{itemize}
+    \item $X \sim \mathcal{N}(\mu_X, \sigma_X^2)$
+    \item $Y \sim \mathcal{N}(\mu_Y, \sigma_Y^2)$
+\end{itemize}
+
+Thus:
+
+\begin{itemize}
+    \item $X \sim \mathcal{N}(2,1^2)$
+    \item $Y \sim \mathcal{N}(-3,2^2)$
+\end{itemize}
+
+\subsection*{(c) Find $\Pr(X < 0)$}
+
+\subsubsection*{Step 1: Use CDF}
+
+\[
+F_X(x) = \Pr(X < x)
+\]
+\[
+\Pr(X < 0) = F_X(0)
+\]
+
+\subsubsection*{Step 2: Standardization}
+
+Convert to standard normal $(Z \sim \mathcal{N}(0,1))$:
+
+\[
+Z = \frac{X - \mu_X}{\sigma_X}
+\]
+
+\[
+\Pr(X < 0) = \Pr\left(Z < \frac{0 - 2}{1}\right)
+= \Pr(Z < -2)
+\]
+
+\subsubsection*{Step 3: Symmetry Property}
+
+\[
+\Phi(-x) = 1 - \Phi(x) = \Pr(Z > x)
+\]
+
+\[
+\Pr(Z < -2) = \Pr(Z > 2)
+\]
+
+\subsubsection*{Step 4: Q-function}
+
+\[
+Q(x) = \Pr(Z > x)
+\]
+
+\[
+\boxed{\Pr(X < 0) = Q(2)}
+\]
+
+\section*{4. Application: Large MIMO System}
+
+\subsection*{System Description}
+
+\begin{itemize}
+    \item Wireless communication system with:
+    \begin{itemize}
+        \item $(M)$ transmit antennas
+        \item $(N)$ receive antennas
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Model}
+
+\begin{itemize}
+    \item Each channel path between antennas is modeled as a \textbf{random variable}:
+    \[
+    h_{ij}
+    \]
+\end{itemize}
+
+Thus, system behavior involves \textbf{multiple random variables jointly}, requiring joint distributions.
+
+\section*{5. Additional Topics Mentioned}
+
+\subsection*{Joint PMF / PDF / CDF}
+
+\begin{itemize}
+    \item Used to represent joint behavior of multiple variables.
+\end{itemize}
+
+\subsection*{Independence of Random Variables}
+
+\begin{itemize}
+    \item Mentioned as a topic (no derivation shown in provided content).
+\end{itemize}
+
+\section*{6. Other Examples (Listed in Outline)}
+
+\begin{itemize}
+    \item Example 2: Uniformly distributed 3D vector
+    \item Example 3: Trivariate random variables
+\end{itemize}
+
+(Note: No detailed derivations present in the provided content.)
+
+
+\end{document}
