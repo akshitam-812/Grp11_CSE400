@@ -1,0 +1,334 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\title{\textbf{Lecture 19: N-Variate Joint PDF/PMF/CDF and Jointly Gaussian Random Variables}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\textit{(Primary Exam Scribe based strictly on Lecture PDF)}
+
+\section*{1. Joint Distribution of N Random Variables}
+
+\subsection*{1.1 Vector Representation}
+
+For $N$ random variables $X_1, X_2, \dots, X_N$, the joint system is represented in \textbf{vector form}:
+
+\[
+\mathbf{X} =
+\begin{bmatrix}
+X_1 \\
+X_2 \\
+\vdots \\
+X_N
+\end{bmatrix}
+\]
+
+\begin{itemize}
+\item This compact form allows us to treat multiple random variables as a \textbf{single entity}.
+\item The \textbf{joint distribution} describes the \textbf{probability behavior of all variables together} (page 17).
+\end{itemize}
+
+\subsection*{1.2 Logical Transition: Bivariate $\rightarrow$ N-Variate}
+
+\subsubsection*{Bivariate Case (2 variables)}
+
+We describe:
+
+\begin{itemize}
+\item Joint PMF: $p_{X,Y}(x,y)$
+\item Joint PDF: $f_{X,Y}(x,y)$
+\item Joint CDF: $F_{X,Y}(x,y)$
+\end{itemize}
+
+\subsubsection*{Extension to N Variables}
+
+The same idea scales \textbf{dimension-wise}:
+
+\begin{itemize}
+\item Instead of 2 variables $\rightarrow$ \textbf{N variables}
+\item Instead of pair $(x,y)$ $\rightarrow$ \textbf{N-dimensional tuple} $(x_1, x_2, \dots, x_N)$
+\end{itemize}
+
+Thus, the structure generalizes as:
+
+\subsubsection*{Joint PMF (Discrete Case)}
+
+\[
+p_{X_1, X_2, \dots, X_N}(x_1, x_2, \dots, x_N)
+= \Pr(X_1 = x_1, X_2 = x_2, \dots, X_N = x_N)
+\]
+
+\subsubsection*{Joint PDF (Continuous Case)}
+
+\[
+f_{X_1, X_2, \dots, X_N}(x_1, x_2, \dots, x_N)
+\]
+
+\begin{itemize}
+\item Represents density in \textbf{N-dimensional space}
+\item Integrates over region $\rightarrow$ probability
+\end{itemize}
+
+\subsubsection*{Joint CDF}
+
+\[
+F_{X_1, \dots, X_N}(x_1, \dots, x_N)
+= \Pr(X_1 \le x_1, \dots, X_N \le x_N)
+\]
+
+\subsubsection*{Key Insight (Scaling Logic)}
+
+\begin{itemize}
+\item The \textbf{definition does not change}, only:
+\begin{itemize}
+\item Number of variables increases
+\item Domain becomes higher-dimensional
+\end{itemize}
+\item Conceptually: \textbf{Bivariate = 2D $\rightarrow$ N-variate = N-dimensional probability space}
+\end{itemize}
+
+\section*{2. Application Context: Large MIMO System}
+
+From page 18:
+
+\begin{itemize}
+\item A wireless system has:
+\begin{itemize}
+\item $M$ transmit antennas
+\item $N$ receive antennas
+\end{itemize}
+\end{itemize}
+
+\subsection*{Interpretation}
+
+\begin{itemize}
+\item Each antenna produces a \textbf{random signal}
+\item System forms an \textbf{N-variate random vector}
+\item Joint distribution captures:
+\begin{itemize}
+\item Signal interactions
+\item Correlations between antennas
+\end{itemize}
+\end{itemize}
+
+\subsection*{Conclusion}
+
+\[
+\text{Number of random variables} \leftrightarrow \text{number of signals/antennas}
+\]
+
+\section*{3. Jointly Gaussian Random Variables}
+
+\subsection*{3.1 Joint Gaussian PDF (Two Variables)}
+
+For two variables $X$ and $Y$:
+
+\[
+f_{X,Y}(x,y)
+=
+\frac{1}{2\pi \sigma_X \sigma_Y \sqrt{1 - \rho^2}}
+\exp \left(
+-\frac{1}{2(1 - \rho^2)}
+\left[
+\left(\frac{x - \mu_X}{\sigma_X}\right)^2
++
+\left(\frac{y - \mu_Y}{\sigma_Y}\right)^2
+- 2\rho
+\left(\frac{x - \mu_X}{\sigma_X}\right)
+\left(\frac{y - \mu_Y}{\sigma_Y}\right)
+\right]
+\right)
+\]
+
+\subsection*{3.2 Parameter Interpretation (Strictly from Slides)}
+
+\subsubsection*{Means}
+
+\[
+\mu_X, \mu_Y \rightarrow \text{centers of distributions}
+\]
+
+\subsubsection*{Standard Deviations}
+
+\[
+\sigma_X, \sigma_Y \rightarrow \text{spread of each variable}
+\]
+
+\subsubsection*{Correlation Coefficient}
+
+\[
+\rho = \frac{\text{cov}(X,Y)}{\sigma_X \sigma_Y}
+\]
+
+\begin{itemize}
+\item Measures \textbf{linear dependence between X and Y} (page 7--8)
+\end{itemize}
+
+\subsection*{3.3 Structure of the Exponential Term}
+
+The exponent contains three parts:
+
+\subsubsection*{(1) Individual Contributions}
+
+\[
+\left(\frac{x - \mu_X}{\sigma_X}\right)^2, \quad
+\left(\frac{y - \mu_Y}{\sigma_Y}\right)^2
+\]
+
+\begin{itemize}
+\item Represent deviation of each variable independently
+\end{itemize}
+
+\subsubsection*{(2) Interaction Term}
+
+\[
+-2\rho
+\left(\frac{x - \mu_X}{\sigma_X}\right)
+\left(\frac{y - \mu_Y}{\sigma_Y}\right)
+\]
+
+\begin{itemize}
+\item Captures \textbf{dependence between X and Y}
+\end{itemize}
+
+\subsubsection*{(3) Scaling Factor}
+
+\[
+\frac{1}{2(1 - \rho^2)}
+\]
+
+\begin{itemize}
+\item Normalizes effect of correlation
+\end{itemize}
+
+\subsection*{3.4 Normalization Constant}
+
+\[
+\frac{1}{2\pi \sigma_X \sigma_Y \sqrt{1 - \rho^2}}
+\]
+
+\begin{itemize}
+\item Ensures total probability integrates to \textbf{1}
+\end{itemize}
+
+\section*{4. Worked Example (From Slides)}
+
+Given (page 4):
+
+\[
+\mu_X = 2, \quad \sigma_X^2 = 1
+\]
+\[
+\mu_Y = -3, \quad \sigma_Y^2 = 4
+\]
+\[
+\text{cov}(X,Y) = -1
+\]
+
+\subsection*{Step 1: Compute Standard Deviations}
+
+\[
+\sigma_X = 1, \quad \sigma_Y = 2
+\]
+
+\subsection*{Step 2: Correlation Coefficient}
+
+\[
+\rho_{XY} = \frac{-1}{(1)(2)} = -\frac{1}{2}
+\]
+
+\subsection*{Step 3: Substitute into Joint PDF}
+
+Final result (page 10):
+
+\[
+f_{X,Y}(x,y)
+=
+\frac{1}{2\pi \sqrt{3}}
+\exp \left(
+-\frac{2}{3}
+\left[
+(x-2)^2
+- \frac{(x-2)(y+3)}{2}
++ \frac{(y+3)^2}{4}
+\right]
+\right)
+\]
+
+\section*{5. Marginal Distributions}
+
+From joint PDF (page 11--12):
+
+\subsection*{Definition}
+
+\[
+f_X(x) = \int_{-\infty}^{\infty} f_{X,Y}(x,y)\,dy
+\]
+
+\[
+f_Y(y) = \int_{-\infty}^{\infty} f_{X,Y}(x,y)\,dx
+\]
+
+\subsection*{Key Property (From Slides)}
+
+If $(X, Y)$ are jointly Gaussian:
+
+\[
+X \sim \mathcal{N}(\mu_X, \sigma_X^2), \quad
+Y \sim \mathcal{N}(\mu_Y, \sigma_Y^2)
+\]
+
+\section*{6. CDF and Q-Function}
+
+\subsection*{Step 1: CDF Definition}
+
+\[
+F_X(x) = \Pr(X \le x)
+\]
+
+Thus:
+
+\[
+\Pr(X < 0) = F_X(0)
+\]
+
+\subsection*{Step 2: Standardization}
+
+\[
+Z = \frac{X - \mu_X}{\sigma_X}
+\]
+
+\[
+\Pr(X < 0) = \Pr\left(Z < \frac{0 - 2}{1}\right)
+= \Pr(Z < -2)
+\]
+
+\subsection*{Step 3: Symmetry}
+
+\[
+\Phi(-x) = 1 - \Phi(x) = \Pr(Z > x)
+\]
+
+\[
+\Pr(Z < -2) = \Pr(Z > 2)
+\]
+
+\subsection*{Step 4: Q-Function}
+
+\[
+Q(x) = \Pr(Z > x)
+\]
+
+\subsection*{Final Answer}
+
+\[
+\Pr(X < 0) = Q(2)
+\]
+
+\end{document}
