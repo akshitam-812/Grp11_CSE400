@@ -1,0 +1,399 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage[a4paper, margin=1in]{geometry}
+
+\begin{document}
+
+\title{CSE400 – Lecture 19: N-Variate Joint PDF/PMF/CDF}
+\author{Instructor: Dhaval Patel, PhD}
+\date{}
+\maketitle
+
+\section*{Slide 1: Title}
+
+\textbf{CSE400 – Fundamentals of Probability in Computing} \\
+\textbf{Lecture 19: N-Variate Joint PDF/PMF/CDF} \\
+Instructor: Dhaval Patel, PhD
+
+\section*{Slide 2: Outline}
+
+\begin{itemize}
+\item Joint Distribution of N Random Variables
+\begin{itemize}
+\item Definition
+\item Example-1
+\item Application: Large MIMO System
+\item Joint PMF, CDF, PDF
+\item Independence of random variables
+\item Example-2: Uniformly distributed 3D vector
+\item Example-3: Trivariate random variables
+\end{itemize}
+\end{itemize}
+
+\section*{Joint Gaussian Random Variables}
+
+\section*{Slide 3: Joint Gaussian PDF}
+
+For two variables $(X)$ and $(Y)$:
+
+\[
+\begin{aligned}
+f_{X,Y}(x,y) &=
+\frac{1}{2\pi \sigma_X \sigma_Y \sqrt{1-\rho^2}} \\
+&\quad \times \exp \left(
+-\frac{1}{2(1-\rho^2)}
+\left[
+\left(\frac{x-\mu_X}{\sigma_X}\right)^2
++
+\left(\frac{y-\mu_Y}{\sigma_Y}\right)^2
+\right.\right. \\
+&\qquad \left.\left.
+-2\rho
+\left(\frac{x-\mu_X}{\sigma_X}\right)
+\left(\frac{y-\mu_Y}{\sigma_Y}\right)
+\right]
+\right)
+\end{aligned}
+\]
+
+Where:
+
+\begin{itemize}
+\item $(\mu_X, \mu_Y)$: means
+\item $(\sigma_X, \sigma_Y)$: standard deviations
+\item $(\rho)$: Pearson correlation coefficient
+\end{itemize}
+
+\section*{Example 1: Joint Distribution of N RVs}
+
+\section*{Slide 4: Problem Statement}
+
+Two random variables $(X)$ and $(Y)$ are jointly Gaussian with:
+
+\begin{itemize}
+\item $(\mu_X = 2,\quad \sigma_X^2 = 1)$
+\item $(\mu_Y = -3,\quad \sigma_Y^2 = 4)$
+\item $(\text{cov}(X,Y) = -1)$
+\end{itemize}
+
+Find:
+
+\begin{itemize}
+\item (a) Joint PDF $(f_{XY}(x,y))$
+\item (b) Marginal PDFs $(f_X(x)), (f_Y(y))$
+\item (c) $(Pr(X < 0))$ (in terms of Q-function)
+\end{itemize}
+
+\section*{Slide 5–6: Joint Gaussian Formula (Used for Substitution)}
+
+\[
+\begin{aligned}
+f_{X,Y}(x,y) &=
+\frac{1}{2\pi \sigma_X \sigma_Y \sqrt{1-\rho^2}} \\
+&\quad \times \exp \left(
+-\frac{1}{2(1-\rho^2)}
+\left[
+\left(\frac{x-\mu_X}{\sigma_X}\right)^2
++
+\left(\frac{y-\mu_Y}{\sigma_Y}\right)^2
+\right.\right. \\
+&\qquad \left.\left.
+-2\rho
+\left(\frac{x-\mu_X}{\sigma_X}\right)
+\left(\frac{y-\mu_Y}{\sigma_Y}\right)
+\right]
+\right)
+\end{aligned}
+\]
+
+\section*{Solution (a): Joint PDF}
+
+\subsection*{Step 1: Correlation Coefficient}
+
+\[
+\rho_{XY} = \frac{\text{cov}(X,Y)}{\sigma_X \sigma_Y}
+\]
+
+\subsection*{Step 2: Standard Deviations}
+
+\[
+\sigma_X = \sqrt{1} = 1, \quad \sigma_Y = \sqrt{4} = 2
+\]
+
+\subsection*{Step 3: Substitute}
+
+\[
+\rho_{XY} = \frac{-1}{(1)(2)} = -\frac{1}{2}
+\]
+
+\subsection*{Step 4: Substitute into General Formula}
+
+\[
+\begin{aligned}
+f_{XY}(x,y) &=
+\frac{1}{2\pi \sigma_X \sigma_Y \sqrt{1-\rho^2}} \\
+&\quad \times \exp \left(
+-\frac{1}{2(1-\rho^2)}
+\left[
+\left(\frac{x-\mu_X}{\sigma_X}\right)^2
+\right.\right. \\
+&\qquad -2\rho_{XY}\frac{(x-\mu_X)(y-\mu_Y)}{\sigma_X\sigma_Y} \\
+&\qquad \left.\left.
++
+\left(\frac{y-\mu_Y}{\sigma_Y}\right)^2
+\right]
+\right)
+\end{aligned}
+\]
+
+\subsection*{Step 5: Substitute Values}
+
+\[
+\mu_X = 2,\quad \sigma_X = 1,\quad \mu_Y = -3,\quad \sigma_Y = 2,\quad \rho_{XY} = -0.5
+\]
+
+\subsection*{Final Joint PDF}
+
+\[
+\begin{aligned}
+f_{XY}(x,y) &=
+\frac{1}{2\pi\sqrt{3}} \\
+&\quad \times \exp \left\{
+-\frac{2}{3}
+\left[
+(x-2)^2
++
+\frac{(x-2)(y+3)}{2}
+\right.\right. \\
+&\qquad \left.\left.
++
+\frac{(y+3)^2}{4}
+\right]
+\right\}
+\end{aligned}
+\]
+
+\section*{Solution (b): Marginal PDFs}
+
+\subsection*{Definition}
+
+\[
+f_X(x) = \int_{-\infty}^{\infty} f_{XY}(x,y)\,dy
+\]
+\[
+f_Y(y) = \int_{-\infty}^{\infty} f_{XY}(x,y)\,dx
+\]
+
+\subsection*{Key Property}
+
+If $(X, Y)$ are jointly Gaussian:
+
+\[
+X \sim \mathcal{N}(\mu_X, \sigma_X^2), \quad
+Y \sim \mathcal{N}(\mu_Y, \sigma_Y^2)
+\]
+
+\subsection*{Marginal X}
+
+\[
+f_X(x) =
+\frac{1}{\sqrt{2\pi}}
+\exp\left(-\frac{(x-2)^2}{2}\right)
+\]
+
+\subsection*{Marginal Y}
+
+\[
+f_Y(y) =
+\frac{1}{2\sqrt{2\pi}}
+\exp\left(-\frac{(y+3)^2}{8}\right)
+\]
+
+\section*{Solution (c): CDF and Standardization}
+
+\subsection*{Step 1: CDF Definition}
+
+\[
+F_X(x) = Pr(X \le x)
+\quad \Rightarrow \quad
+F_X(0) = Pr(X < 0)
+\]
+
+\subsection*{Step 2: Standardization}
+
+\[
+Z = \frac{X - \mu_X}{\sigma_X}
+\]
+
+\[
+\begin{aligned}
+Pr(X < 0) &=
+Pr\left(
+\frac{X - \mu_X}{\sigma_X} < \frac{0 - 2}{1}
+\right) \\
+&= Pr(Z < -2) \\
+&= \Phi(-2)
+\end{aligned}
+\]
+
+\subsection*{Step 3: Symmetry Property}
+
+\[
+\Phi(-x) = 1 - \Phi(x) = Pr(Z > x)
+\]
+
+\[
+Pr(Z < -2) = Pr(Z > 2)
+\]
+
+\subsection*{Step 4: Q-function}
+
+\[
+Q(x) = Pr(Z > x)
+\]
+
+\subsection*{Final Answer}
+
+\[
+Pr(X < 0) = Q(2)
+\]
+
+\section*{Joint Distribution of N Random Variables}
+
+\section*{Slide 17: Definition}
+
+For random variables $(X_1, X_2, \dots, X_N)$:
+
+\[
+\mathbf{X} =
+\begin{bmatrix}
+X_1 \\
+X_2 \\
+\vdots \\
+X_N
+\end{bmatrix}
+\]
+
+\subsection*{Properties}
+
+\begin{itemize}
+\item Joint distribution describes probability behavior of all variables together
+\item Can be represented as:
+\begin{itemize}
+\item Joint PMF
+\item Joint PDF
+\item Joint CDF
+\end{itemize}
+\end{itemize}
+
+\section*{Application: Large MIMO System}
+
+\section*{Slide 18: System Setup}
+
+Wireless communication system with:
+
+\begin{itemize}
+\item $(M)$ transmit antennas
+\item $(N)$ receive antennas
+\end{itemize}
+
+Joint distribution models:
+
+\begin{itemize}
+\item Signal vectors
+\item Channel coefficients
+\item Noise vectors
+\end{itemize}
+
+\section*{Joint PMF / PDF / CDF (General Form)}
+
+\subsection*{Joint PMF (Discrete)}
+
+\[
+p(x_1, x_2, \dots, x_N) = Pr(X_1=x_1, \dots, X_N=x_N)
+\]
+
+\subsection*{Joint PDF (Continuous)}
+
+\[
+f(x_1, x_2, \dots, x_N)
+\]
+
+\subsection*{Joint CDF}
+
+\[
+F(x_1, x_2, \dots, x_N)
+= Pr(X_1 \le x_1, \dots, X_N \le x_N)
+\]
+
+\section*{Independence of Random Variables}
+
+\subsection*{Definition}
+
+Random variables are independent if:
+
+\subsubsection*{PMF case}
+
+\[
+p(x_1, x_2, \dots, x_N)
+=
+\prod_{i=1}^{N} p_{X_i}(x_i)
+\]
+
+\subsubsection*{PDF case}
+
+\[
+f(x_1, x_2, \dots, x_N)
+=
+\prod_{i=1}^{N} f_{X_i}(x_i)
+\]
+
+\section*{Example 2: Uniformly Distributed 3D Vector}
+
+Let:
+
+\[
+(X,Y,Z) \sim \text{Uniform}
+\]
+
+over a region.
+
+\subsection*{Joint PDF}
+
+\[
+f_{XYZ}(x,y,z) =
+\begin{cases}
+\text{constant}, & \text{inside region} \\
+0, & \text{otherwise}
+\end{cases}
+\]
+
+\section*{Example 3: Trivariate Random Variables}
+
+Given 3 variables:
+
+\[
+(X_1, X_2, X_3)
+\]
+
+\subsection*{Joint Distribution}
+
+\[
+f(x_1, x_2, x_3)
+\]
+
+\subsection*{Marginals}
+
+\[
+f_{X_1}(x_1) = \iint f(x_1,x_2,x_3)\,dx_2\,dx_3
+\]
+
+\subsection*{Conditional Distribution}
+
+\[
+f_{X_1|X_2,X_3}
+\]
+
+\section*{END OF COMPLETE SCRIBE (ALL SLIDES COVERED)}
+
+\end{document}

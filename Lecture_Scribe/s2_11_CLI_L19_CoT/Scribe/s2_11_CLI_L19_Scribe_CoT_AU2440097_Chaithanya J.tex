@@ -1,0 +1,211 @@
+\documentclass[11pt]{article}
+
+% ===================== PACKAGES =====================
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+
+% ===================== HEADER =====================
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{CSE400}
+\lhead{Lecture 19}
+\rfoot{\thepage}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{Lecture 19: N-Variate Joint PDF/PMF/CDF}}\\[0.5em]
+    {\large CSE400 - Fundamentals of Probability in Computing}\\[0.5em]
+    {\normalsize Dhaval Patel, PhD}\\
+    {\normalsize SEAS, Ahmedabad University}\\
+    {\normalsize March 17, 2026}
+\end{center}
+
+\vspace{1em}
+
+% ===================== OUTLINE =====================
+\section*{Outline}
+\begin{itemize}
+    \item Joint Distribution of $N$ Random Variables
+    \begin{itemize}
+        \item Definition
+        \item Example-1
+        \item Application: Large MIMO System
+        \item Joint PMF, CDF, PDF
+        \item Independence of Random Variables
+        \item Example-2: Uniformly Distributed 3D Vector
+        \item Example-3: Trivariate Random Variables
+    \end{itemize}
+\end{itemize}
+
+% ===================== SECTION =====================
+\section{Joint Distribution of $N$ Random Variables}
+
+\subsection{Definition}
+
+Let $X_1, X_2, \dots, X_N$ be $N$ random variables defined on the same probability space.
+
+\begin{itemize}
+    \item The \textbf{joint cumulative distribution function (CDF)} is defined as:
+    \[
+    F_{X_1, X_2, \dots, X_N}(x_1, x_2, \dots, x_N)
+    = P(X_1 \le x_1, X_2 \le x_2, \dots, X_N \le x_N)
+    \]
+\end{itemize}
+
+\subsection{Joint PMF}
+
+For discrete random variables:
+
+\begin{itemize}
+    \item The \textbf{joint probability mass function (PMF)} is:
+    \[
+    p_{X_1, X_2, \dots, X_N}(x_1, x_2, \dots, x_N)
+    = P(X_1 = x_1, X_2 = x_2, \dots, X_N = x_N)
+    \]
+\end{itemize}
+
+\subsection{Joint PDF}
+
+For continuous random variables:
+
+\begin{itemize}
+    \item The \textbf{joint probability density function (PDF)} is defined such that:
+    \[
+    F_{X_1, \dots, X_N}(x_1, \dots, x_N)
+    = \int_{-\infty}^{x_1} \cdots \int_{-\infty}^{x_N}
+    f_{X_1, \dots, X_N}(t_1, \dots, t_N)\, dt_1 \cdots dt_N
+    \]
+\end{itemize}
+
+\subsection{Properties}
+
+\begin{itemize}
+    \item Non-negativity:
+    \[
+    f_{X_1, \dots, X_N}(x_1, \dots, x_N) \ge 0
+    \]
+    
+    \item Total probability:
+    \[
+    \int \cdots \int f_{X_1, \dots, X_N}(x_1, \dots, x_N)\, dx_1 \cdots dx_N = 1
+    \]
+\end{itemize}
+
+% ===================== EXAMPLE 1 =====================
+\section{Example-1}
+
+(As presented in slides)
+
+\begin{itemize}
+    \item Consider joint behavior of multiple random variables.
+    \item Evaluate probabilities using joint PMF/PDF definitions.
+\end{itemize}
+
+% ===================== APPLICATION =====================
+\section{Application: Large MIMO System}
+
+\begin{itemize}
+    \item Multiple-input multiple-output (MIMO) systems involve multiple random variables.
+    \item Signal components across antennas can be modeled as joint random variables.
+    \item Joint distributions are required to analyze system performance.
+\end{itemize}
+
+% ===================== INDEPENDENCE =====================
+\section{Independence of Random Variables}
+
+\subsection{Definition}
+
+Random variables $X_1, X_2, \dots, X_N$ are independent if:
+
+\[
+f_{X_1, X_2, \dots, X_N}(x_1, x_2, \dots, x_N)
+= \prod_{i=1}^{N} f_{X_i}(x_i)
+\]
+
+for continuous case, or
+
+\[
+p_{X_1, X_2, \dots, X_N}(x_1, x_2, \dots, x_N)
+= \prod_{i=1}^{N} p_{X_i}(x_i)
+\]
+
+for discrete case.
+
+\subsection{Equivalent Condition using CDF}
+
+\[
+F_{X_1, X_2, \dots, X_N}(x_1, \dots, x_N)
+= \prod_{i=1}^{N} F_{X_i}(x_i)
+\]
+
+% ===================== EXAMPLE 2 =====================
+\section{Example-2: Uniformly Distributed 3D Vector}
+
+\begin{itemize}
+    \item Consider a 3D random vector:
+    \[
+    (X, Y, Z)
+    \]
+    
+    \item Uniformly distributed over a region in 3D space.
+    
+    \item Joint PDF:
+    \[
+    f_{X,Y,Z}(x,y,z) = \text{constant}
+    \]
+    over the valid region.
+    
+    \item Outside the region:
+    \[
+    f_{X,Y,Z}(x,y,z) = 0
+    \]
+    
+    \item Constant determined using normalization:
+    \[
+    \iiint f_{X,Y,Z}(x,y,z)\,dx\,dy\,dz = 1
+    \]
+\end{itemize}
+
+% ===================== EXAMPLE 3 =====================
+\section{Example-3: Trivariate Random Variables}
+
+\begin{itemize}
+    \item Consider three random variables:
+    \[
+    X, Y, Z
+    \]
+    
+    \item Joint distribution defined using:
+    \[
+    f_{X,Y,Z}(x,y,z)
+    \]
+    
+    \item Marginal distributions obtained by integration:
+    \[
+    f_X(x) = \int \int f_{X,Y,Z}(x,y,z)\, dy\, dz
+    \]
+    
+    \[
+    f_Y(y) = \int \int f_{X,Y,Z}(x,y,z)\, dx\, dz
+    \]
+    
+    \[
+    f_Z(z) = \int \int f_{X,Y,Z}(x,y,z)\, dx\, dy
+    \]
+\end{itemize}
+
+\subsection{General Marginalization}
+
+\begin{itemize}
+    \item For any subset of variables:
+    \[
+    f_{X_1, \dots, X_k}(x_1, \dots, x_k)
+    = \int \cdots \int f_{X_1, \dots, X_N}(x_1, \dots, x_N)\, dx_{k+1}\cdots dx_N
+    \]
+\end{itemize}
+
+% ===================== END =====================
+\end{document}
