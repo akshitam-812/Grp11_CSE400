@@ -1,0 +1,159 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+\setstretch{1.2}
+
+\title{\textbf{Lecture 23: Predicting the Impossible: Tail Bounds and System Reliability}}
+\author{Course: CSE400}
+\date{April 02, 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Case Study: Amazon Black Friday Sale 2026}
+
+\section*{1. Lecture Information}
+
+\begin{itemize}[leftmargin=0.6in]
+    \item \textbf{Course:} CSE400
+    \item \textbf{Lecture Number:} 23
+    \item \textbf{Title:} Predicting the Impossible: Tail Bounds and System Reliability
+    \item \textbf{Case Study:} Amazon Black Friday Sale 2026
+    \item \textbf{Topic Focus:} Tails and Bounds
+    \item \textbf{Instructor:} Dhaval Patel, PhD
+    \item \textbf{Date:} April 02, 2026
+\end{itemize}
+
+\section*{2. Amazon Black Friday Sale 2026}
+
+The Amazon Black Friday Sale 2026 is expected to officially begin on Friday, November 27, 2026.
+
+The lecture states that official confirmation from Amazon usually arrives closer to the actual sale date.
+
+The lecture also mentions that historical patterns and expert forecasts from the following sources suggest the expected timeline:
+
+\begin{itemize}
+    \item 91mobiles
+    \item Bajaj Finserv
+\end{itemize}
+
+This sale is used as a case study to discuss uncertainty in computing systems.
+
+\section*{3. Connecting the Sale with Uncertainty and Computing}
+
+The lecture connects the Amazon Black Friday Sale 2026 with uncertainty and computing.
+
+During a large-scale sale event:
+
+\begin{itemize}
+    \item User traffic can increase significantly.
+    \item The number of requests reaching the system can become unpredictable.
+    \item Servers may face sudden spikes in load.
+    \item Reliability of the system becomes important.
+    \item There is uncertainty in predicting how large the demand surge can become.
+\end{itemize}
+
+The lecture uses tail bounds as tools for reasoning about such uncertainty.
+
+\section*{4. Tail Bounds Introduced in the Lecture}
+
+The lecture introduces three important tail bounds:
+
+\begin{itemize}
+    \item Markov’s Inequality
+    \item Chebyshev’s Inequality
+    \item Chernoff Bound
+\end{itemize}
+
+These methods are presented as techniques for studying uncertainty and reliability in systems.
+
+\section*{5. Markov’s Inequality}
+
+Markov’s Inequality is introduced as one of the tail bounds.
+
+It is used when we want to bound the probability that a random variable becomes very large.
+
+The lecture includes Markov’s Inequality as a basic probabilistic tool for analyzing uncertain events in computing systems.
+
+Possible application in the Amazon sale context:
+
+\begin{itemize}
+    \item Estimating the probability that the number of requests becomes extremely large.
+    \item Estimating the probability that system load exceeds a threshold.
+\end{itemize}
+
+\section*{6. Chebyshev’s Inequality}
+
+Chebyshev’s Inequality is introduced after Markov’s Inequality.
+
+This inequality is used to reason about how far a random variable can move away from its average value.
+
+The lecture includes Chebyshev’s Inequality as a stronger tool when information about variability is available.
+
+Possible application in the Amazon sale context:
+
+\begin{itemize}
+    \item Estimating how far the number of customer requests may deviate from the expected number.
+    \item Studying how server demand may vary around the average load.
+\end{itemize}
+
+\section*{7. Chernoff Bound}
+
+Chernoff Bound is introduced as another important tail bound.
+
+The lecture presents it as a tool for obtaining stronger probability bounds for large deviations.
+
+Possible application in the Amazon sale context:
+
+\begin{itemize}
+    \item Bounding the probability that request traffic becomes much larger than expected.
+    \item Estimating the probability of severe overload during the sale.
+    \item Studying reliability of large-scale systems under extreme demand.
+\end{itemize}
+
+\section*{8. System Reliability}
+
+The lecture links tail bounds with system reliability.
+
+System reliability refers to the ability of a computing system to continue functioning correctly under uncertain conditions.
+
+In the context of the Amazon Black Friday Sale 2026:
+
+\begin{itemize}
+    \item Reliability is important because traffic may be very high.
+    \item Sudden demand spikes can affect system performance.
+    \item Probabilistic bounds help estimate rare but important events.
+    \item Tail bounds help in predicting the chance of overload.
+    \item Such analysis can help in planning server capacity and handling uncertainty.
+\end{itemize}
+
+\section*{9. Summary of the Lecture}
+
+The lecture focuses on the use of tail bounds for reasoning about uncertainty in large-scale computing systems.
+
+The Amazon Black Friday Sale 2026 is used as a motivating example because it involves unpredictable traffic and possible overload conditions.
+
+The three main probabilistic tools introduced are:
+
+\begin{itemize}
+    \item Markov’s Inequality
+    \item Chebyshev’s Inequality
+    \item Chernoff Bound
+\end{itemize}
+
+These tools are presented as methods for studying:
+
+\begin{itemize}
+    \item Rare events
+    \item Large deviations
+    \item System overload
+    \item Reliability of computing systems
+    \item Uncertainty in demand during large online sales
+\end{itemize}
+
+\end{document}
