@@ -1,0 +1,346 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage[a4paper, margin=1in]{geometry}
+
+\begin{document}
+
+\title{Lecture 23: Predicting the Impossible – Tail Bounds and System Reliability}
+\date{}
+\maketitle
+
+(Coding Session – Tails and Bounds)
+
+\section*{1. Introduction (Slide 1)}
+Title: Predicting the Impossible: Tail Bounds and System Reliability
+
+Context: Case Study: Amazon Black Friday Sale 2026
+
+Focus: Probability bounds, uncertainty, and system reliability
+
+\section*{2. Amazon Black Friday Sale 2026 (Slide 2)}
+
+Timeline (as given):
+\begin{itemize}
+\item Expected start: Friday, November 27, 2026
+\item Early deals: November 20–21, 2026
+\item Main sale period: November 25–27, 2026
+\item Cyber Monday: November 30, 2026
+\end{itemize}
+
+Target Matrix (as shown):
+\begin{itemize}
+\item Electronics \& Tech → Discount ceiling: 75\%
+\item Amazon Devices → Discount ceiling: 50\%
+\item Fashion \& Apparel → Discount ceiling: 60\%
+\item Home \& Kitchen → Discount ceiling: 60\%
+\end{itemize}
+
+Additional factors:
+
+Amazon Prime advantages:
+\begin{itemize}
+\item Early access to inventory
+\item Exclusive cashback offers
+\end{itemize}
+
+Partner bank leverage:
+\begin{itemize}
+\item 10\% instant discount
+\item 5\% multiplier cashback
+\end{itemize}
+
+\section*{3. Connecting with Uncertainty and Computing (Slide 3)}
+
+System Modeling
+
+Multiple servers: Each server processes jobs
+
+Condition of interest: Highlighted server has $\ge k$ jobs
+
+Poisson Arrivals (Datacenter)
+
+Job arrivals modeled as a Poisson process
+
+Time window: 1 hour
+
+Event of interest: Many arrivals within one hour
+
+Condition:
+
+\section*{4. Tail Probability Objective (Slide 4)}
+
+Goal:
+
+Interpretation: Probability that system load exceeds threshold
+
+Context: Used to predict:
+\begin{itemize}
+\item Server crashes
+\item System overload
+\end{itemize}
+
+\section*{5. Mean vs Tail Behavior (Slide 5)}
+
+Statement: The mean is safe
+
+The tail is catastrophic
+
+Simulation Details:
+\begin{itemize}
+\item Server traffic: 1000 minutes
+\item Distribution: Poisson with $\lambda = 50$
+\end{itemize}
+
+Number of arrivals $\ge k$
+
+\[
+P(X \ge k)
+\]
+
+Threshold: $k = 60$
+
+Observation:
+
+Crash occurs when: $X \ge 60$
+
+Empirical crash rate:
+
+$87/1000 = 8.7\%$
+
+Required computation:
+
+$P(X \ge 60)$
+
+\section*{6. Hierarchy of Bounds (Slide 6)}
+
+Statement: Better inputs yield tighter bounds
+
+Level 1: Markov’s Inequality (Mean)
+
+Level 2: Chebyshev’s Inequality (Variance)
+
+Level 3: Chernoff Bound (Full distribution, MGF)
+
+Insight:
+
+Exact probability may not be computable
+
+Upper bounds are used
+
+More information $\Rightarrow$ less over-estimation
+
+\section*{7. Markov’s Inequality (Slide 7)}
+
+\[
+P(X \ge a) \le \frac{E[X]}{a}
+\]
+
+Interpretation: Requires only mean
+
+Decay Behavior: Linear decay
+
+Observation: Over-estimates significantly
+
+\section*{8. Chebyshev’s Inequality (Slide 8)}
+
+\[
+P(|X - \mu| \ge a) \le \frac{\sigma^2}{a^2}
+\]
+
+Equivalent form:
+\[
+P(X \ge a) \le \frac{\sigma^2}{(a - \mu)^2}
+\]
+
+Decay Behavior: Polynomial decay
+
+Observation: Tighter than Markov
+
+Still over-estimates
+
+\section*{9. Chernoff Bound (Slide 9)}
+
+\[
+P(X \ge a) \le \min_{t>0} e^{-ta} M_X(t)
+\]
+
+Where:
+\[
+M_X(t) = E[e^{tX}]
+\]
+
+Alternative form:
+\[
+P(X \ge a) \le e^{-at + \ln M_X(t)}
+\]
+
+Decay Behavior: Exponential decay
+
+Observation: Tightest bound
+
+Closely matches exact probability
+
+\section*{10. Comparison of Decay (Slide 10)}
+
+Markov: $1/k$
+
+Chebyshev: $1/k^2$
+
+Chernoff: $e^{-k}$
+
+Conclusion: Chernoff closely maps reality
+
+Markov remains pessimistic
+
+\section*{11. Case Study: SLA Breach (Slide 11)}
+
+Distribution: Poisson
+
+Mean: $\lambda = 500$
+
+Threshold: $k = 600$
+
+Objective:
+\[
+P(X \ge 600)
+\]
+
+Task:
+\begin{itemize}
+\item Predict probability
+\item Size backup capacity
+\end{itemize}
+
+\section*{12. Cost of Loose Bound (Slide 12)}
+
+Exact risk: $\sim 1.4\%$
+
+Chernoff: $\sim 8.8\%$
+
+Chebyshev: $\sim 20\%$
+
+Markov: $\sim 90.9\%$
+
+Interpretation:
+
+Markov predicts extremely high failure probability
+
+Leads to unnecessary provisioning
+
+\section*{13. Financial Impact (Slide 13)}
+
+\[
+\text{Waste Multiplier} = \frac{\text{Exact Probability}}{\text{Bound Estimate}}
+\]
+
+At $\lambda = 500$:
+
+Chernoff: $\sim 10.7\times$
+
+Chebyshev: $\sim 6422\times$
+
+Markov: $\sim 107039\times$
+
+Conclusion:
+
+Loose bounds $\Rightarrow$ massive cost
+
+\section*{14. Over-estimation Interpretation (Slide 14)}
+
+Statement:
+
+Mathematical over-estimation = financial over-provisioning
+
+Explanation:
+
+Over-estimated probability $\Rightarrow$ more backup servers
+
+Leads to unused capacity
+
+\section*{15. Different Distributions (Slide 15)}
+
+Cases:
+\begin{itemize}
+\item Normal → stable jobs
+\item Poisson → independent requests
+\item Binomial → fixed users
+\item Gamma → bursty traffic
+\end{itemize}
+
+Observation:
+
+Chernoff works well for:
+\begin{itemize}
+\item Poisson
+\item Binomial
+\end{itemize}
+
+Limitation:
+
+For heavy-tailed (Gamma): Over-estimation occurs
+
+Alternative methods needed
+
+\section*{16. Decision Matrix (Slide 16)}
+
+\begin{tabular}{|c|c|c|c|}
+\hline
+Method & Requires & Decay & Use Case \\
+\hline
+Markov & Mean & $1/k$ & Rough check \\
+Chebyshev & $\mu, \sigma^2$ & $1/k^2$ & Unknown distribution \\
+Chernoff & Full MGF & $e^{-k}$ & Precise sizing \\
+\hline
+\end{tabular}
+
+\section*{17. Laplace Distribution Task (Slide 17)}
+
+\[
+X \sim \text{Laplace}(\mu, b)
+\]
+
+Properties:
+\begin{itemize}
+\item Sharp central peak
+\item Heavy tails
+\end{itemize}
+
+Threshold:
+\[
+a = \mu + 3\sigma
+\]
+
+Relation:
+\[
+\sigma = b\sqrt{2}
+\]
+
+Objective: Derive Chernoff bound
+
+\section*{18. Derivation Blueprint (Slide 18)}
+
+Step 1: Compute MGF
+\[
+M_X(t) = E[e^{tX}]
+\]
+
+Step 2: Apply Chernoff Inequality
+\[
+P(X \ge a) \le e^{-ta} M_X(t)
+\]
+
+Step 3: Optimize
+
+Differentiate w.r.t $t$
+
+Set derivative = 0
+
+Solve for optimal $t$
+
+Step 4: Substitute
+
+Plug optimal $t$ into bound
+
+\section*{End of Lecture Scribe}
+
+\end{document}
