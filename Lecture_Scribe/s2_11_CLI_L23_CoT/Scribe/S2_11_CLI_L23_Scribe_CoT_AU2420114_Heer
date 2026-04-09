@@ -1,0 +1,154 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\title{Lecture 23: Predicting the Impossible --- Tail Bounds and System Reliability}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Case Study Overview}
+
+The Amazon Black Friday Sale 2026 represents a high-uncertainty, high-load system scenario, where extreme traffic spikes—not average behavior—determine system failure.
+
+Traffic arrivals follow a Poisson process. System failure occurs when requests exceed a critical threshold $k$.
+
+The central quantity of interest is:
+\[
+P(X \geq k)
+\]
+
+Even if the mean $\lambda = 50$ is safe, the system fails due to tail probability, not expectation.
+
+\textbf{Key Insight:}
+System reliability is governed by the tail, not the mean.
+
+\section{Mathematical Foundation of Tail Bounds}
+
+We aim to estimate:
+\[
+P(X \geq k)
+\]
+
+\subsection{Markov’s Inequality}
+
+For a non-negative random variable $X$:
+\[
+P(X \geq a) \leq \frac{\mathbb{E}[X]}{a}
+\]
+
+\textbf{Requirements:} Mean $\mu = \mathbb{E}[X]$
+
+\textbf{Behavior:} Linear decay $\frac{1}{k}$
+
+\subsection{Chebyshev’s Inequality}
+
+\[
+P(|X - \mu| \geq a) \leq \frac{\sigma^2}{a^2}
+\]
+
+Equivalent form:
+\[
+P(X \geq a) \leq \frac{\sigma^2}{(a - \mu)^2}
+\]
+
+\textbf{Requirements:} Mean $\mu$, Variance $\sigma^2$
+
+\textbf{Behavior:} Polynomial decay $\frac{1}{k^2}$
+
+\subsection{Chernoff Bound}
+
+General form:
+\[
+P(X \geq a) \leq \min_{t > 0} e^{-ta} M_X(t)
+\]
+
+where
+\[
+M_X(t) = \mathbb{E}[e^{tX}]
+\]
+
+Derived exponential form:
+\[
+P(X \geq a) \leq e^{-k(\ln r - r + 1)}
+\]
+
+\textbf{Requirements:} Moment Generating Function (MGF)
+
+\textbf{Behavior:} Exponential decay $e^{-k}$
+
+\section{Comparative Analysis: Race to Zero}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Bound} & \textbf{Decay Type} & \textbf{Behavior} \\
+\hline
+Markov & Linear & Slow decay \\
+Chebyshev & Polynomial & Moderate decay \\
+Chernoff & Exponential & Fast decay \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Insight:} More information leads to tighter bounds:
+\[
+\text{Markov} \rightarrow \text{Chebyshev} \rightarrow \text{Chernoff}
+\]
+
+\section{System Reliability Metrics}
+
+Example:
+\[
+\lambda = 500, \quad k = 600
+\]
+
+We estimate:
+\[
+P(X \geq 600)
+\]
+
+\subsection{Failure Estimates}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Method} & \textbf{Estimated Failure} \\
+\hline
+Exact & $\sim 1.4\%$ \\
+Chernoff & $\sim 8.8\%$ \\
+Chebyshev & $\sim 20\%$ \\
+Markov & $\sim 90.9\%$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Financial Impact}
+
+\[
+\text{Waste} = \frac{\text{Bound Estimate}}{\text{Exact Probability}}
+\]
+
+At $\lambda = 500$:
+\begin{itemize}
+\item Chernoff: $10.7\times$
+\item Chebyshev: $6422\times$
+\item Markov: $107039\times$
+\end{itemize}
+
+\section{Final Conclusion}
+
+\begin{itemize}
+\item System failure depends on tail probability $P(X \geq k)$
+\item Exact computation is often infeasible
+\item Use bounds:
+\[
+\text{Markov} \rightarrow \text{Chebyshev} \rightarrow \text{Chernoff}
+\]
+\item Better information $\Rightarrow$ tighter bounds
+\item Loose bounds $\Rightarrow$ financial waste
+\item Tight bounds $\Rightarrow$ efficient system design
+\end{itemize}
+
+\end{document}
