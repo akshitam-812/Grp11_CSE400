@@ -1,0 +1,192 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{setspace}
+
+\setstretch{1.2}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{Lecture 23 Scribe}}\\[0.3cm]
+    {\large \textbf{Predicting the Impossible: Tail Bounds and System Reliability}}\\[0.2cm]
+    {\normalsize \textit{Case Study: Amazon Black Friday Sale 2026 (Coding Session – Tails and Bounds)}}
+\end{center}
+
+\vspace{0.5cm}
+
+\section*{1. Introduction}
+
+\begin{itemize}
+    \item \textbf{Lecture Title:} Predicting the Impossible: Tail Bounds and System Reliability  
+    \item \textbf{Context:} Case Study on Amazon Black Friday Sale 2026  
+    \item \textbf{Instructor:} Dhaval Patel, PhD  
+    \item \textbf{Affiliation:} Computer Science and Engineering (CSE), Ahmedabad University  
+    \item \textbf{Date:} April 02, 2026  
+\end{itemize}
+
+\section*{2. Case Study: Amazon Black Friday Sale 2026}
+
+\begin{itemize}
+    \item The \textbf{Amazon Black Friday Sale 2026} is expected to begin on:
+    \begin{itemize}
+        \item \textbf{Friday, November 27, 2026}
+    \end{itemize}
+    \item The timeline is based on:
+    \begin{itemize}
+        \item Historical patterns  
+        \item Forecasts from external sources (e.g., 91mobiles, Bajaj Finserv)
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Purpose of Case Study}
+
+\begin{itemize}
+    \item To connect:
+    \begin{itemize}
+        \item \textbf{Uncertainty}
+        \item \textbf{Computing}
+    \end{itemize}
+    \item The system under consideration involves:
+    \begin{itemize}
+        \item Large-scale user participation  
+        \item High demand variability  
+        \item Uncertain system behavior  
+    \end{itemize}
+\end{itemize}
+
+\section*{3. Conceptual Framework: Uncertainty and Computing}
+
+\begin{itemize}
+    \item The lecture establishes a connection between:
+    \begin{itemize}
+        \item Real-world large-scale systems (e.g., online sale events)
+        \item Mathematical tools for handling uncertainty  
+    \end{itemize}
+    \item The central problem:
+    \begin{itemize}
+        \item \textbf{Predicting rare or extreme events} in system performance  
+    \end{itemize}
+\end{itemize}
+
+\section*{4. Tail Bounds}
+
+Tail bounds are introduced as mathematical tools to quantify the probability of extreme deviations.
+
+\subsection*{4.1 Markov’s Inequality}
+
+\begin{itemize}
+    \item Introduced as a fundamental inequality for bounding probabilities  
+    \item Applies to:
+    \begin{itemize}
+        \item Non-negative random variables  
+    \end{itemize}
+\end{itemize}
+
+\subsection*{4.2 Chebyshev’s Inequality}
+
+\begin{itemize}
+    \item Extends the idea of bounding probabilities  
+    \item Incorporates:
+    \begin{itemize}
+        \item Mean  
+        \item Variance  
+    \end{itemize}
+\end{itemize}
+
+\subsection*{4.3 Chernoff Bound}
+
+\begin{itemize}
+    \item Provides tighter bounds compared to:
+    \begin{itemize}
+        \item Markov’s Inequality  
+        \item Chebyshev’s Inequality  
+    \end{itemize}
+    \item Used for:
+    \begin{itemize}
+        \item Bounding tail probabilities of sums of random variables  
+    \end{itemize}
+\end{itemize}
+
+\section*{5. Application to System Reliability}
+
+\begin{itemize}
+    \item Tail bounds are used to:
+    \begin{itemize}
+        \item Analyze \textbf{system reliability}
+        \item Estimate \textbf{probability of failure or overload}
+    \end{itemize}
+    \item In the context of the Amazon sale:
+    \begin{itemize}
+        \item System must handle:
+        \begin{itemize}
+            \item Sudden spikes in traffic  
+            \item High uncertainty in demand  
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\section*{6. Lecture Flow and Structure}
+
+\begin{itemize}
+    \item The lecture progresses through:
+    \begin{enumerate}
+        \item Introduction to real-world uncertainty (Amazon sale case)
+        \item Motivation for probabilistic bounds  
+        \item Presentation of three inequalities:
+        \begin{itemize}
+            \item Markov’s Inequality  
+            \item Chebyshev’s Inequality  
+            \item Chernoff Bound  
+        \end{itemize}
+        \item Connection to system reliability  
+    \end{enumerate}
+\end{itemize}
+
+\section*{7. Class Participation}
+
+\begin{itemize}
+    \item Slides indicate:
+    \begin{itemize}
+        \item Active engagement during the lecture  
+        \item Participation-based interaction  
+    \end{itemize}
+\end{itemize}
+
+\section*{8. Key Logical Dependencies}
+
+\begin{itemize}
+    \item Real-world uncertainty $\rightarrow$ Need for probabilistic modeling  
+    \item Probabilistic modeling $\rightarrow$ Use of tail bounds  
+    \item Tail bounds $\rightarrow$ Quantification of extreme events  
+    \item Quantification $\rightarrow$ Application to system reliability  
+\end{itemize}
+
+\section*{9. Summary of Included Content}
+
+\begin{itemize}
+    \item Definitions:
+    \begin{itemize}
+        \item Markov’s Inequality  
+        \item Chebyshev’s Inequality  
+        \item Chernoff Bound  
+    \end{itemize}
+    \item Context:
+    \begin{itemize}
+        \item Amazon Black Friday Sale 2026  
+    \end{itemize}
+    \item Conceptual Link:
+    \begin{itemize}
+        \item Uncertainty $\leftrightarrow$ Computing  
+    \end{itemize}
+    \item Application:
+    \begin{itemize}
+        \item System reliability under uncertain demand  
+    \end{itemize}
+\end{itemize}
+
+\vspace{0.5cm}
+
+\noindent \textit{End of Scribe}
+
+\end{document}
