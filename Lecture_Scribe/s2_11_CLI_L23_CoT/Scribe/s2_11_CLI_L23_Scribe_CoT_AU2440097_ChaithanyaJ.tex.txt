@@ -1,0 +1,155 @@
+﻿\documentclass[11pt]{article}
+
+
+% ===================== PACKAGES =====================
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+
+
+% ===================== DOCUMENT =====================
+\begin{document}
+
+
+\begin{center}
+    {\LARGE \textbf{Lecture 23: Predicting the Impossible: Tail Bounds and System Reliability}}\\[6pt]
+    {\large Case Study: Amazon Black Friday Sale 2026}\\[6pt]
+    {\large (Coding Session – Tails and Bounds)}\\[12pt]
+
+
+    \textbf{Instructor:} Dhaval Patel, PhD\\
+    Associate Professor, CSE\\
+    Machine Intelligence, Computing and xG Networks (MICxN) Research Lab\\
+    SEAS, Ahmedabad University\\[6pt]
+
+
+    \textbf{Date:} April 02, 2026
+\end{center}
+
+
+\vspace{10pt}
+
+
+% ===================== SECTION 1 =====================
+\section{Amazon Black Friday Sale 2026}
+
+
+The Amazon Black Friday Sale 2026 is expected to officially begin on:
+\[
+\text{Friday, November 27, 2026}
+\]
+
+
+While official confirmation is typically released closer to the event, historical patterns and external forecasts suggest the expected timeline.
+
+
+% ===================== SECTION 2 =====================
+\section{Uncertainty and Computing in Large-Scale Systems}
+
+
+The Amazon Black Friday Sale 2026 is presented as a case study to analyze:
+\begin{itemize}
+    \item Large-scale system behavior under uncertainty
+    \item Probabilistic modeling of extreme events
+    \item Reliability under high-load conditions
+\end{itemize}
+
+
+The computational challenge lies in predicting rare but critical events such as:
+\begin{itemize}
+    \item System overload
+    \item Traffic spikes
+    \item Failure probabilities
+\end{itemize}
+
+
+% ===================== SECTION 3 =====================
+\section{Tail Bounds Framework}
+
+
+The lecture introduces fundamental probabilistic tools used to bound extreme deviations.
+
+
+\subsection{Markov’s Inequality}
+
+
+A general inequality used to bound the probability that a non-negative random variable deviates far from its expectation.
+
+
+\subsection{Chebyshev’s Inequality}
+
+
+A refinement over Markov’s inequality that incorporates variance to provide tighter bounds on deviations from the mean.
+
+
+\subsection{Chernoff Bound}
+
+
+A stronger exponential bound used for analyzing the tail probabilities of sums of random variables, particularly useful in high-dimensional and large-scale systems.
+
+
+% ===================== SECTION 4 =====================
+\section{Conceptual Connection}
+
+
+The inequalities are positioned as analytical tools for:
+\begin{itemize}
+    \item Bounding rare events
+    \item Estimating probabilities of extreme system behavior
+    \item Ensuring system reliability under uncertain demand
+\end{itemize}
+
+
+These tools are essential for modeling scenarios such as:
+\begin{itemize}
+    \item Sudden surge in user requests
+    \item Load balancing under unpredictable demand
+    \item Failure probability estimation in distributed systems
+\end{itemize}
+
+
+% ===================== SECTION 5 =====================
+\section{Class Participation}
+
+
+The lecture includes structured participation components associated with:
+\begin{itemize}
+    \item Interpretation of tail bounds
+    \item Application to system reliability
+    \item Case-based reasoning using the Amazon Black Friday Sale scenario
+\end{itemize}
+
+
+% ===================== SECTION 6 =====================
+\section{Structural Progression of the Lecture}
+
+
+The lecture proceeds through:
+\begin{enumerate}
+    \item Introduction to the case study
+    \item Connection between uncertainty and computation
+    \item Presentation of key probabilistic inequalities
+    \item Application-oriented discussion
+    \item Interactive participation
+\end{enumerate}
+
+
+% ===================== SECTION 7 =====================
+\section{Summary}
+
+
+The lecture establishes a framework for analyzing extreme events in computational systems using:
+\begin{itemize}
+    \item Markov’s Inequality
+    \item Chebyshev’s Inequality
+    \item Chernoff Bound
+\end{itemize}
+
+
+These tools form the foundational basis for reasoning about:
+\[
+\text{Tail probabilities} \quad \text{and} \quad \text{System reliability}
+\]
+in large-scale, uncertain environments such as the Amazon Black Friday Sale.
+
+
+\end{document}
